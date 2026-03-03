@@ -5,7 +5,7 @@ let con = mysql.createConnection(config.db);
 
 con.connect(function (err) {
     
-    let C_Decks = "CREATE TABLE IF NOT EXISTS Decks (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(40), Qtt INT, img VARCHAR(150));" ;
+    let C_Decks = "CREATE TABLE IF NOT EXISTS Decks (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(40) UNIQUE, Qtt INT, img VARCHAR(150));" ;
     let C_Decks_cards = "CREATE TABLE IF NOT EXISTS Decks_cards (id INT AUTO_INCREMENT PRIMARY KEY, id_Deck INT, id_Card INT, Qtt INT);";
     let C_cards = "CREATE TABLE IF NOT EXISTS cards (id INT AUTO_INCREMENT PRIMARY KEY, nom VARCHAR(20), type VARCHAR(20), dgt INT, role VARCHAR(20), effet TINYINT(1) NOT NULL DEFAULT 0, animation VARCHAR(40), img VARCHAR(40), description VARCHAR(80), music VARCHAR(40));";
     let C_cards_effect = "CREATE TABLE IF NOT EXISTS cards_effect (id INT AUTO_INCREMENT PRIMARY KEY, id_card INT, id_e INT);";
