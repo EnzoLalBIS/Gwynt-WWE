@@ -3,6 +3,18 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 let port = 3000;
+const Cards = require("./route/getCards")
+const CardsEffects = require("./route/getCardsEffects")
+const Cardsparam = require("./route/getCardsparam")
+const Deck = require("./route/getDeck")
+const DeckCards = require("./route/getDeckCards")
+const Effects = require("./route/getEffects")
+const Effectsparam = require("./route/getEffectsparam")
+const Users = require("./route/getUsers")
+const postUsers = require("./route/postUsers");
+const putUsers = require("./route/putUsers");
+const putDeckUser = require("./route/putDeckUser");
+const postDeckCard = require("./route/postDeckCard");
 
 // Tell cors to stfu
 const corsOptions = {
@@ -21,7 +33,21 @@ app.use(
   })
 );
 
+
+
 // Routes
+app.use("/cards", Cards);
+app.use("/cardsEffects", CardsEffects);
+app.use("/Cardsparam", Cardsparam);
+app.use("/Deck", Deck);
+app.use("/DeckCards", DeckCards);
+app.use("/Effects", Effects);
+app.use("/Effectsparam", Effectsparam);
+app.use("/Users", Users);
+app.use("/postUsers", postUsers);
+app.use("/putUsers", putUsers);
+app.use("/putDeckUser", putDeckUser);
+app.use("/postDeckCard", putDeckUser);
 // app.get("/", (req, res) => {
 //   res.send("Je suis une saucisse");
 // });
