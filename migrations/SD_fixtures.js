@@ -4,374 +4,190 @@ let config = require("../config");
 let con = mysql.createConnection(config.db);
 
 con.connect(function (err) {
+
   if (err) throw err;
-  console.log("Connected !");
+  console.log("Connected!");
 
   // -------------------------
   // SMACKDOWN deck
   // -------------------------
-  const checkSdDeck = "SELECT id FROM Decks WHERE name = 'SMACKDOWN' LIMIT 1";
-  const C_sdDeck = "INSERT INTO Decks (name, Qtt, img) VALUES ('SMACKDOWN', 25, NULL)";
+
+  const checkDeck =
+    "SELECT id FROM Decks WHERE name='SMACKDOWN' LIMIT 1";
+
+  const createDeck =
+    "INSERT INTO Decks (name,Qtt,img) VALUES ('SMACKDOWN',25,NULL)";
+
+  // -------------------------
+  // SQL queries
+  // -------------------------
+
+  const qCheckCard =
+    "SELECT id FROM cards WHERE name=? LIMIT 1";
+
+  const qInsertCard =
+    "INSERT INTO cards (name,type,dmg,role,effect,animation,img,description,music) VALUES (?,?,?,?,?,?,?,?,?)";
+
+  const qInsertDeckCard =
+    "INSERT INTO Decks_cards (id_Deck,id_Card,Qtt) VALUES (?,?,?)";
+
+  const qInsertEffect =
+    "INSERT INTO effect (description,dgt,state,target,effect_trigger,death,steal,can_generate,create_id,card_effect) VALUES (?,?,?,?,?,0,0,0,NULL,NULL)";
+
+  const qInsertCardEffect =
+    "INSERT INTO cards_effect (id_card,id_e) VALUES (?,?)";
+
+  const qUpdateCardEffect =
+    "UPDATE cards SET effect=1 WHERE id=?";
 
   // -------------------------
   // SMACKDOWN cards
   // -------------------------
-  const sdCards = [
-    { name: "Cody Rhodes", type: "superstar", dmg: 9, role: "main-event", effect: 0, animation: "pose", img: "cody.png", description: "Top star.", music: "cody.mp3", qtt: 1 },
-    { name: "Randy Orton", type: "superstar", dmg: 9, role: "main-event", effect: 0, animation: "stare", img: "orton.png", description: "Legend killer.", music: "orton.mp3", qtt: 1 },
-    { name: "AJ Styles", type: "superstar", dmg: 8, role: "main-event", effect: 0, animation: "taunt", img: "ajstyles.png", description: "Phenomenal.", music: "ajstyles.mp3", qtt: 1 },
-    { name: "Charlotte Flair", type: "superstar", dmg: 8, role: "main-event", effect: 0, animation: "pose", img: "charlotte.png", description: "The Queen.", music: "charlotte.mp3", qtt: 1 },
-    { name: "Bianca Belair", type: "superstar", dmg: 8, role: "main-event", effect: 0, animation: "pose", img: "bianca.png", description: "Power & speed.", music: "bianca.mp3", qtt: 1 },
 
-    { name: "Kevin Owens", type: "superstar", dmg: 7, role: "mid-card", effect: 0, animation: "brawl", img: "ko.png", description: "Brawler.", music: "ko.mp3", qtt: 1 },
-    { name: "Sami Zayn", type: "superstar", dmg: 7, role: "mid-card", effect: 0, animation: "hype", img: "sami.png", description: "Underdog.", music: "sami.mp3", qtt: 1 },
-    { name: "Drew McIntyre", type: "superstar", dmg: 7, role: "mid-card", effect: 0, animation: "power", img: "drew.png", description: "Powerhouse.", music: "drew.mp3", qtt: 1 },
-    { name: "Bobby Lashley", type: "superstar", dmg: 7, role: "mid-card", effect: 0, animation: "power", img: "lashley.png", description: "Dominant.", music: "lashley.mp3", qtt: 1 },
-    { name: "Shinsuke Nakamura", type: "superstar", dmg: 6, role: "mid-card", effect: 0, animation: "taunt", img: "shinsuke.png", description: "Striker.", music: "shinsuke.mp3", qtt: 1 },
-    { name: "Finn Balor", type: "superstar", dmg: 6, role: "mid-card", effect: 0, animation: "taunt", img: "balor.png", description: "Precision.", music: "balor.mp3", qtt: 1 },
-    { name: "Asuka", type: "superstar", dmg: 7, role: "mid-card", effect: 0, animation: "taunt", img: "asuka.png", description: "Striker.", music: "asuka.mp3", qtt: 1 },
-    { name: "Bayley", type: "superstar", dmg: 6, role: "mid-card", effect: 0, animation: "taunt", img: "bayley.png", description: "Veteran.", music: "bayley.mp3", qtt: 1 },
-    { name: "Solo Sikoa", type: "superstar", dmg: 6, role: "mid-card", effect: 0, animation: "stare", img: "solo.png", description: "Enforcer.", music: "solo.mp3", qtt: 1 },
-    { name: "Karrion Kross", type: "superstar", dmg: 6, role: "mid-card", effect: 0, animation: "stare", img: "kross.png", description: "Intimidation.", music: "kross.mp3", qtt: 1 },
-    { name: "Rey Fenix", type: "superstar", dmg: 6, role: "mid-card", effect: 0, animation: "highfly", img: "fenix.png", description: "High flyer.", music: "fenix.mp3", qtt: 1 },
-    { name: "Iyo Sky", type: "superstar", dmg: 6, role: "mid-card", effect: 0, animation: "highfly", img: "iyo.png", description: "High flyer.", music: "iyo.mp3", qtt: 1 },
-    { name: "Sasha Banks", type: "superstar", dmg: 6, role: "mid-card", effect: 0, animation: "taunt", img: "sasha.png", description: "The Boss.", music: "sasha.mp3", qtt: 1 },
+  const smackCards = [
 
-    { name: "Ricochet", type: "superstar", dmg: 5, role: "opener", effect: 0, animation: "highfly", img: "ricochet.png", description: "Aerial.", music: "ricochet.mp3", qtt: 1 },
-    { name: "Carmelo Hayes", type: "superstar", dmg: 5, role: "opener", effect: 0, animation: "taunt", img: "melo.png", description: "Fast.", music: "melo.mp3", qtt: 1 },
+{ name:"Bianca Belair",type:"superstar",dmg:14,role:"finisher",effect:0,animation:"pose",img:"bianca.png",description:"EST of WWE.",music:"bianca.mp3",qtt:1 },
 
-    { name: "Nick Aldis", type: "support", dmg: 0, role: "utility", effect: 0, animation: "order", img: "aldis.png", description: "GM control.", music: "aldis.mp3", qtt: 1 },
-    { name: "SD Crowd", type: "support", dmg: 0, role: "utility", effect: 0, animation: "cheer", img: "crowd_sd.png", description: "Crowd boost.", music: "crowd_sd.mp3", qtt: 1 },
+{ name:"Bobby Lashley",type:"superstar",dmg:14,role:"finisher",effect:0,animation:"power",img:"lashley.png",description:"The All Mighty.",music:"lashley.mp3",qtt:1 },
 
-    { name: "Reversal SD", type: "special", dmg: 0, role: "utility", effect: 0, animation: "reverse", img: "reversal.png", description: "Cancel a play.", music: "sfx_reversal.mp3", qtt: 1 },
-    { name: "Kendo Stick", type: "special", dmg: 0, role: "utility", effect: 0, animation: "kendo", img: "kendo.png", description: "Cheap shot.", music: "sfx_kendo.mp3", qtt: 1 },
-    { name: "Interference", type: "special", dmg: 0, role: "utility", effect: 0, animation: "runin", img: "runin.png", description: "Chaos moment.", music: "sfx_rush.mp3", qtt: 1 }
+{ name:"LA Knight",type:"superstar",dmg:9,role:"value",effect:0,animation:"taunt",img:"laknight.png",description:"YEAH!",music:"laknight.mp3",qtt:1 },
+
+{ name:"Charlotte Flair",type:"superstar",dmg:8,role:"engine",effect:0,animation:"pose",img:"charlotte.png",description:"The Queen.",music:"charlotte.mp3",qtt:1 },
+
+{ name:"Rey Mysterio",type:"superstar",dmg:7,role:"value",effect:0,animation:"springboard",img:"rey.png",description:"Legend.",music:"rey.mp3",qtt:2 },
+
+{ name:"Santos Escobar",type:"superstar",dmg:6,role:"engine",effect:0,animation:"pose",img:"escobar.png",description:"LWO leader.",music:"escobar.mp3",qtt:2 },
+
+{ name:"Dragon Lee",type:"superstar",dmg:5,role:"control",effect:0,animation:"highfly",img:"dragonlee.png",description:"Lucha prodigy.",music:"dragonlee.mp3",qtt:2 },
+
+{ name:"Austin Theory",type:"superstar",dmg:5,role:"setup",effect:0,animation:"pose",img:"theory.png",description:"The Now.",music:"theory.mp3",qtt:2 },
+
+{ name:"Grayson Waller",type:"superstar",dmg:5,role:"value",effect:0,animation:"taunt",img:"waller.png",description:"Grayson Waller Effect.",music:"waller.mp3",qtt:2 },
+
+{ name:"Sheamus",type:"superstar",dmg:4,role:"control",effect:0,animation:"brawl",img:"sheamus.png",description:"Celtic Warrior.",music:"sheamus.mp3",qtt:2 },
+
+{ name:"Ridge Holland",type:"superstar",dmg:4,role:"value",effect:0,animation:"power",img:"ridge.png",description:"Heavy hitter.",music:"ridge.mp3",qtt:2 },
+
+{ name:"Butch",type:"superstar",dmg:4,role:"control",effect:0,animation:"rage",img:"butch.png",description:"Wild striker.",music:"butch.mp3",qtt:2 },
+
+{ name:"Shotzi",type:"superstar",dmg:4,role:"engine",effect:0,animation:"taunt",img:"shotzi.png",description:"Ballsy.",music:"shotzi.mp3",qtt:2 },
+
+{ name:"Iyo Sky",type:"superstar",dmg:4,role:"engine",effect:0,animation:"highfly",img:"iyo.png",description:"Genius of the Sky.",music:"iyo.mp3",qtt:2 },
+
+{ name:"Damage CTRL",type:"support",dmg:4,role:"setup",effect:0,animation:"pose",img:"damagectrl.png",description:"Faction control.",music:"damagectrl.mp3",qtt:1 },
+
+{ name:"SmackDown GM",type:"support",dmg:0,role:"tutor",effect:0,animation:"order",img:"gm.png",description:"Show authority.",music:"gm.mp3",qtt:1 },
+
+{ name:"Tag Team Match",type:"special",dmg:0,role:"removal",effect:0,animation:"tag",img:"tag.png",description:"Tag team chaos.",music:"tag.mp3",qtt:1 },
+
+{ name:"SmackDown Live",type:"artifact",dmg:0,role:"setup",effect:0,animation:"arena",img:"sd.png",description:"Friday Night SmackDown.",music:"sd.mp3",qtt:1 }
+
   ];
 
-  function dmgByRole(role) {
-    if (role === "main-event") return 4;
-    if (role === "mid-card") return 3;
-    if (role === "opener") return 2;
-    return 3;
-  }
+  // -------------------------
+  // Effects
+  // -------------------------
 
-  const effectsToSeed = [
-    { cardName: "Cody Rhodes", effectName: "Cross Rhodes (Cody Rhodes)", state: "damage_enemy;cond=if_enemy_has_main-event", target: "enemy" },
-    { cardName: "Randy Orton", effectName: "RKO (Randy Orton)", state: "damage_enemy;cond=if_enemy_used_special", target: "enemy" },
-    { cardName: "AJ Styles", effectName: "Styles Clash (AJ Styles)", state: "damage_enemy;cond=if_round_is_close", target: "enemy" },
-    { cardName: "Charlotte Flair", effectName: "Figure Eight (Charlotte Flair)", state: "debuff_enemy;cond=if_enemy_has_mid-card", target: "enemy" },
-    { cardName: "Bianca Belair", effectName: "KOD (Bianca Belair)", state: "damage_enemy;cond=if_enemy_has_more_cards_on_board", target: "enemy" },
+  const effects = [
 
-    { cardName: "Kevin Owens", effectName: "Stunner (Kevin Owens)", state: "damage_enemy;cond=if_you_are_losing_round", target: "enemy" },
-    { cardName: "Sami Zayn", effectName: "Helluva Kick (Sami Zayn)", state: "damage_enemy;cond=if_enemy_has_support", target: "enemy" },
-    { cardName: "Drew McIntyre", effectName: "Claymore (Drew McIntyre)", state: "damage_enemy;cond=if_enemy_played_main-event", target: "enemy" },
-    { cardName: "Bobby Lashley", effectName: "Hurt Lock (Bobby Lashley)", state: "debuff_enemy;cond=if_enemy_has_main-event", target: "enemy" },
-    { cardName: "Shinsuke Nakamura", effectName: "Kinshasa (Shinsuke Nakamura)", state: "damage_enemy;cond=if_enemy_is_debuffed", target: "enemy" },
+{ card:"Bianca Belair",desc:"KOD",dgt:5,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-    { cardName: "Finn Balor", effectName: "Coup de Grace (Finn Balor)", state: "damage_enemy;cond=if_you_played_support_this_round", target: "enemy" },
-    { cardName: "Asuka", effectName: "Asuka Lock (Asuka)", state: "debuff_enemy;cond=if_enemy_has_main-event", target: "enemy" },
-    { cardName: "Bayley", effectName: "Rose Plant (Bayley)", state: "damage_enemy;cond=if_round_is_close", target: "enemy" },
-    { cardName: "Solo Sikoa", effectName: "Samoan Spike (Solo Sikoa)", state: "damage_enemy;cond=if_enemy_used_special", target: "enemy" },
-    { cardName: "Karrion Kross", effectName: "Kross Jacket (Karrion Kross)", state: "debuff_enemy;cond=if_enemy_has_mid-card", target: "enemy" },
+{ card:"Bobby Lashley",desc:"Spear",dgt:4,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-    { cardName: "Rey Fenix", effectName: "Fenix Driver (Rey Fenix)", state: "damage_enemy;cond=if_enemy_has_opener", target: "enemy" },
-    { cardName: "Iyo Sky", effectName: "Moonsault (Iyo Sky)", state: "damage_enemy;cond=if_enemy_has_opener", target: "enemy" },
-    { cardName: "Sasha Banks", effectName: "Bank Statement (Sasha Banks)", state: "debuff_enemy;cond=if_enemy_has_more_points", target: "enemy" },
+{ card:"LA Knight",desc:"BFT",dgt:3,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-    { cardName: "Ricochet", effectName: "630 Splash (Ricochet)", state: "damage_enemy;cond=if_you_played_opener_this_round", target: "enemy" },
-    { cardName: "Carmelo Hayes", effectName: "Nothing But Net (Carmelo Hayes)", state: "damage_enemy;cond=if_random_success", target: "enemy" },
+{ card:"Charlotte Flair",desc:"Figure Eight",dgt:2,state:"debuff_enemy",target:"enemy",trigger:"on_play" },
 
-    { cardName: "Reversal SD", effectName: "Reversal SD (Special)", state: "cancel_effect;cond=only_last_effect", target: "enemy", fixedDmg: 0 },
-    { cardName: "Kendo Stick", effectName: "Kendo Stick (Special)", state: "damage_enemy;cond=if_enemy_has_superstar", target: "enemy", fixedDmg: 3 },
-    { cardName: "Interference", effectName: "Interference (Special)", state: "damage_enemy;cond=if_you_are_losing_round", target: "enemy", fixedDmg: 2 }
+{ card:"Rey Mysterio",desc:"619",dgt:2,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+
+{ card:"Dragon Lee",desc:"Flying Kick",dgt:2,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+
+{ card:"Iyo Sky",desc:"Moonsault",dgt:2,state:"damage_enemy",target:"enemy",trigger:"on_play" }
+
   ];
 
-  const qCheckCard = "SELECT id FROM cards WHERE name = ? LIMIT 1";
-  const qInsertCard = "INSERT INTO cards (name,type,dmg,role,effect,animation,img,description,music) VALUES (?,?,?,?,?,?,?,?,?)";
+  // -------------------------
+  // Seed logic
+  // -------------------------
 
-  const qCheckDeckLink = "SELECT id FROM Decks_cards WHERE id_Deck = ? AND id_Card = ? LIMIT 1";
-  const qInsertDeckLink = "INSERT INTO Decks_cards (id_Deck,id_Card,Qtt) VALUES (?,?,?)";
-  const qUpdateDeckLink = "UPDATE Decks_cards SET Qtt = ? WHERE id = ?";
+  function seed(deckId){
 
-  const qGetCardRole = "SELECT id, role FROM cards WHERE name = ? LIMIT 1";
-  const qGetEffect = "SELECT id FROM effect WHERE description = ? LIMIT 1";
+    smackCards.forEach(card=>{
 
-  const qInsertEffect =
-    "INSERT INTO effect (description,dgt,state,target,death,steal,can_generate,create_id,card_effect) VALUES (?,?,?,?,0,0,0,NULL,NULL)";
+      con.query(qCheckCard,[card.name],function(err,res){
 
-  const qCheckCardEffectLink = "SELECT id FROM cards_effect WHERE id_card = ? AND id_e = ? LIMIT 1";
-  const qInsertCardEffectLink = "INSERT INTO cards_effect (id_card,id_e) VALUES (?,?)";
+        if(err) throw err;
 
-  const qSetCardHasEffect = "UPDATE cards SET effect = 1 WHERE id = ?";
+        if(res.length === 0){
 
-  function upsertOneCardInDeck(deckId, card, cb) {
+          con.query(qInsertCard,
+            [card.name,card.type,card.dmg,card.role,card.effect,card.animation,card.img,card.description,card.music],
+            function(err,cardRes){
 
-    con.query(qCheckCard,[card.name],function(err,rows){
+              if(err) throw err;
 
-      if(err) return cb(err)
+              processCard(deckId,cardRes.insertId,card);
 
-      function link(cardId){
+            });
 
-        con.query(qCheckDeckLink,[deckId,cardId],function(err,linkRows){
+        } else {
 
-          if(err) return cb(err)
+          processCard(deckId,res[0].id,card);
 
-          if(linkRows.length===0){
+        }
 
-            con.query(qInsertDeckLink,[deckId,cardId,card.qtt],cb)
+      });
 
-          }
-          else{
+    });
 
-            con.query(qUpdateDeckLink,[card.qtt,linkRows[0].id],cb)
+  }
 
-          }
+  function processCard(deckId,cardId,card){
 
-        })
+    con.query(qInsertDeckCard,[deckId,cardId,card.qtt]);
+
+    effects.forEach(e=>{
+
+      if(e.card === card.name){
+
+        con.query(qInsertEffect,
+          [e.desc,e.dgt,e.state,e.target,e.trigger],
+          function(err,eRes){
+
+            if(err) throw err;
+
+            con.query(qInsertCardEffect,[cardId,eRes.insertId]);
+
+            con.query(qUpdateCardEffect,[cardId]);
+
+          });
 
       }
 
-      if(rows.length===0){
-
-        con.query(qInsertCard,[
-
-          card.name,
-          card.type,
-          card.dmg,
-          card.role,
-          card.effect,
-          card.animation,
-          card.img,
-          card.description,
-          card.music
-
-        ],function(err,ins){
-
-          if(err) return cb(err)
-
-          link(ins.insertId)
-
-        })
-
-      }
-
-      else{
-
-        link(rows[0].id)
-
-      }
-
-    })
+    });
 
   }
 
-  function seedAllCards(deckId,cb){
+  con.query(checkDeck,function(err,res){
 
-    let i=0
+    if(err) throw err;
 
-    function next(err){
+    if(res.length === 0){
 
-      if(err) return cb(err)
+      con.query(createDeck,function(err,deckRes){
 
-      if(i>=sdCards.length) return cb(null)
+        if(err) throw err;
 
-      upsertOneCardInDeck(deckId,sdCards[i],function(err){
+        seed(deckRes.insertId);
 
-        i++
-        next(err)
+      });
 
-      })
+    } else {
 
-    }
-
-    next()
-
-  }
-
-  function seedOneEffect(item,cb){
-
-    con.query(qGetCardRole,[item.cardName],function(err,cardRows){
-
-      if(err) return cb(err)
-
-      if(cardRows.length===0) return cb(null)
-
-      const cardId = cardRows[0].id
-      const role = cardRows[0].role
-
-      const dmg = typeof item.fixedDmg==="number" ? item.fixedDmg : dmgByRole(role)
-
-      con.query(qGetEffect,[item.effectName],function(err,effRows){
-
-        if(err) return cb(err)
-
-        function link(effectId){
-
-          con.query(qCheckCardEffectLink,[cardId,effectId],function(err,linkRows){
-
-            if(err) return cb(err)
-
-            function finalize(){
-
-              con.query(qSetCardHasEffect,[cardId],cb)
-
-            }
-
-            if(linkRows.length===0){
-
-              con.query(qInsertCardEffectLink,[cardId,effectId],function(err){
-
-                if(err) return cb(err)
-
-                finalize()
-
-              })
-
-            }
-
-            else{
-
-              finalize()
-
-            }
-
-          })
-
-        }
-
-        if(effRows.length===0){
-
-          con.query(qInsertEffect,[
-
-            item.effectName,
-            dmg,
-            item.state,
-            item.target || "enemy"
-
-          ],function(err,ins){
-
-            if(err) return cb(err)
-
-            link(ins.insertId)
-
-          })
-
-        }
-
-        else{
-
-          link(effRows[0].id)
-
-        }
-
-      })
-
-    })
-
-  }
-
-  function seedAllEffects(cb){
-
-    let i=0
-
-    function next(err){
-
-      if(err) return cb(err)
-
-      if(i>=effectsToSeed.length) return cb(null)
-
-      seedOneEffect(effectsToSeed[i],function(err){
-
-        i++
-        next(err)
-
-      })
+      seed(res[0].id);
 
     }
 
-    next()
+  });
 
-  }
-
-  function runChecks(deckId){
-
-    const qCountDeckCards = "SELECT COUNT(*) AS nb FROM Decks_cards WHERE id_Deck=?"
-
-    const qMissingEffectLinks =
-      "SELECT c.name FROM cards c LEFT JOIN cards_effect ce ON ce.id_card=c.id WHERE c.effect=1 AND ce.id IS NULL"
-
-    con.query(qCountDeckCards,[deckId],function(err,rows){
-
-      if(err){
-        console.error("Check failed:",err.message)
-        return con.end()
-      }
-
-      console.log("SMACKDOWN deck cards count =",rows[0].nb)
-
-      con.query(qMissingEffectLinks,function(err,miss){
-
-        if(err){
-          console.error("Check failed:",err.message)
-          return con.end()
-        }
-
-        console.log("Cards marked effect=1 but missing cards_effect links =",miss.length)
-
-        con.end()
-
-      })
-
-    })
-
-  }
-
-  con.query(checkSdDeck,function(err,deckRows){
-
-    if(err) throw err
-
-    function afterDeck(deckId){
-
-      seedAllCards(deckId,function(err){
-
-        if(err){
-          console.error("Seed cards/deck failed:",err.message)
-          return con.end()
-        }
-
-        seedAllEffects(function(err){
-
-          if(err){
-            console.error("Seed effects failed:",err.message)
-            return con.end()
-          }
-
-          runChecks(deckId)
-
-        })
-
-      })
-
-    }
-
-    if(deckRows.length===0){
-
-      con.query(C_sdDeck,function(err,ins){
-
-        if(err) throw err
-
-        afterDeck(ins.insertId)
-
-      })
-
-    }
-
-    else{
-
-      afterDeck(deckRows[0].id)
-
-    }
-
-  })
-
-})
+});
