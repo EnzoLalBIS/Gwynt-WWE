@@ -32,7 +32,7 @@ con.connect(function (err) {
     "INSERT INTO Decks_cards (id_Deck,id_Card,Qtt) VALUES (?,?,?)";
 
   const qInsertEffect =
-    "INSERT INTO effect (description,dgt,state,target,effect_trigger,death,steal,can_generate,create_id,card_effect) VALUES (?,?,?,?,?,0,0,0,NULL,NULL)";
+    "INSERT INTO effect (description,dmg,state,target,effect_trigger) VALUES (?,?,?,?,?)";
 
   const qInsertCardEffect =
     "INSERT INTO cards_effect (id_card,id_e) VALUES (?,?)";
@@ -90,19 +90,19 @@ con.connect(function (err) {
 
   const effects = [
 
-{ card:"Bianca Belair",desc:"KOD",dgt:5,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+{ card:"Bianca Belair",desc:"KOD",dmg:5,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-{ card:"Bobby Lashley",desc:"Spear",dgt:4,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+{ card:"Bobby Lashley",desc:"Spear",dmg:4,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-{ card:"LA Knight",desc:"BFT",dgt:3,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+{ card:"LA Knight",desc:"BFT",dmg:3,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-{ card:"Charlotte Flair",desc:"Figure Eight",dgt:2,state:"debuff_enemy",target:"enemy",trigger:"on_play" },
+{ card:"Charlotte Flair",desc:"Figure Eight",dmg:2,state:"debuff_enemy",target:"enemy",trigger:"on_play" },
 
-{ card:"Rey Mysterio",desc:"619",dgt:2,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+{ card:"Rey Mysterio",desc:"619",dmg:2,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-{ card:"Dragon Lee",desc:"Flying Kick",dgt:2,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+{ card:"Dragon Lee",desc:"Flying Kick",dmg:2,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-{ card:"Iyo Sky",desc:"Moonsault",dgt:2,state:"damage_enemy",target:"enemy",trigger:"on_play" }
+{ card:"Iyo Sky",desc:"Moonsault",dmg:2,state:"damage_enemy",target:"enemy",trigger:"on_play" }
 
   ];
 
@@ -151,7 +151,7 @@ con.connect(function (err) {
       if(e.card === card.name){
 
         con.query(qInsertEffect,
-          [e.desc,e.dgt,e.state,e.target,e.trigger],
+          [e.desc,e.dmg,e.state,e.target,e.trigger],
           function(err,eRes){
 
             if(err) throw err;

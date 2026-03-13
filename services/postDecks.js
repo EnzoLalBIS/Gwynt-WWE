@@ -4,7 +4,7 @@ const config = require("../config");
 
 async function create(decks) {
   const result = await db.query(
-    `INSERT INTO Decks (User_Name, Password) VALUES (?, ?)`,
+    `INSERT INTO Decks (name) VALUES (?)`,
     [user.User_Name, user.Password]
   );
 

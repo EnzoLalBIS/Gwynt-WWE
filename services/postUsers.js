@@ -4,8 +4,8 @@ const config = require("../config");
 
 async function create(user) {
   const result = await db.query(
-    `INSERT INTO users (User_Name, Password) VALUES (?, ?)`,
-    [user.User_Name, user.Password]
+    `INSERT INTO users (user_Name, Password) VALUES (?, ?)`,
+    [user.user_Name, user.Password]
   );
 
   let message = "Erreur lors de la création du compte";

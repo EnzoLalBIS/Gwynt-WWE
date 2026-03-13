@@ -4,7 +4,7 @@ const config = require("../config");
 
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
-  const rows = await db.query(`SELECT User_Name,Password FROM users`);
+  const rows = await db.query(`SELECT user_Name,password FROM users`);
   const data = helper.emptyOrRows(rows);
   const meta = { page };
 

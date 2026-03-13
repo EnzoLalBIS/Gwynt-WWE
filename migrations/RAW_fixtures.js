@@ -32,7 +32,7 @@ con.connect(function (err) {
     "INSERT INTO Decks_cards (id_Deck,id_Card,Qtt) VALUES (?,?,?)";
 
   const qInsertEffect =
-    "INSERT INTO effect (description,dgt,state,target,effect_trigger,death,steal,can_generate,create_id,card_effect) VALUES (?,?,?,?,?,0,0,0,NULL,NULL)";
+    "INSERT INTO effect (description,dmg,state,target,effect_trigger) VALUES (?,?,?,?,?)";
 
   const qInsertCardEffect =
     "INSERT INTO cards_effect (id_card,id_e) VALUES (?,?)";
@@ -90,19 +90,19 @@ con.connect(function (err) {
 
   const effects = [
 
-{ card:"Roman Reigns",desc:"Spear",dgt:5,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+{ card:"Roman Reigns",desc:"Spear",dmg:5,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-{ card:"Seth Rollins",desc:"Curb Stomp",dgt:4,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+{ card:"Seth Rollins",desc:"Curb Stomp",dmg:4,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-{ card:"Brock Lesnar",desc:"F5",dgt:5,state:"damage_enemy",target:"enemy",trigger:"on_play" },
+{ card:"Brock Lesnar",desc:"F5",dmg:5,state:"damage_enemy",target:"enemy",trigger:"on_play" },
 
-{ card:"Rhea Ripley",desc:"Judgment Backup",dgt:0,state:"spawn_token",target:"ally",trigger:"on_play" },
+{ card:"Rhea Ripley",desc:"Judgment Backup",dmg:0,state:"spawn_token",target:"ally",trigger:"on_play" },
 
-{ card:"Cody Rhodes",desc:"American Comeback",dgt:2,state:"boost_self",target:"self",trigger:"on_turn_start" },
+{ card:"Cody Rhodes",desc:"American Comeback",dmg:2,state:"boost_self",target:"self",trigger:"on_turn_start" },
 
-{ card:"AJ Styles",desc:"Phenomenal Assist",dgt:2,state:"boost_ally",target:"ally",trigger:"on_play" },
+{ card:"AJ Styles",desc:"Phenomenal Assist",dmg:2,state:"boost_ally",target:"ally",trigger:"on_play" },
 
-{ card:"Gunther",desc:"Ring General",dgt:1,state:"boost_self",target:"self",trigger:"on_turn_start" }
+{ card:"Gunther",desc:"Ring General",dmg:1,state:"boost_self",target:"self",trigger:"on_turn_start" }
 
   ];
 
@@ -151,7 +151,7 @@ con.connect(function (err) {
       if(e.card === card.name){
 
         con.query(qInsertEffect,
-          [e.desc,e.dgt,e.state,e.target,e.trigger],
+          [e.desc,e.dmg,e.state,e.target,e.trigger],
           function(err,eRes){
 
             if(err) throw err;
