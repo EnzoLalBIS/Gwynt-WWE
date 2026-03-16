@@ -4,7 +4,7 @@ const config = require("../config");
 
 async function getMultiple(page = 1, type) {
   const offset = helper.getOffset(page, config.listPerPage);
-  let url  = `SELECT nom FROM cards WHERE type = "${type}"`
+  let url  = `SELECT name FROM cards WHERE type = "${type}"`
   console.log(url);
   
   const rows = await db.query(url);
