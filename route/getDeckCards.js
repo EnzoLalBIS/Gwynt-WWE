@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const getUsers = require("../services/getDeckCards");
+const getDeckCards = require("../services/getDeckCards"); // Name update
 
-router.get("/{:type}", async function (req, res, next) {
+router.get("/:deckId", async function (req, res, next) {
   try {
-    console.log(req.query.type);
-    
-    res.json(await getCards.getMultiple(req.query.page, req.query.type));
+    const deckId = req.params.deckId;
+    console.log("Fetching cards for deck:", deckId);
+    res.json(await getDeckCards.getByDeck(deckId));
   } catch (err) {
-    console.error(`Error while getting the users`, err.message);
+    console.error(`Error while getting deck cards`, err.message);
     next(err);
   }
 });
