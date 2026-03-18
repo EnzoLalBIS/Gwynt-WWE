@@ -1,22 +1,17 @@
 const db = require("./db");
 const helper = require("../helper");
-const config = require("../config");
 
-async function getMultiple(page = 1, id_Deck) {
-  const offset = helper.getOffset(page, config.listPerPage);
-  let url  = `SELECT id_Card FROM decks_cards id_Deck = "${id_Deck}"`
-  console.log(url);
-  
-  const rows = await db.query(url);
-  const data = helper.emptyOrRows(rows);
-  const meta = { page };
-
-  return {
-    data,
-    meta,
-  };
+async function getByDeck(deckId) {
+  const rows = await db.query(
+    `SELECT c.id, c.name, c.type, c.dmg, c.role, c.effect,
+            c.animation, c.img, c.description, c.music,
+            dc.Qtt
+     FROM cards c
+     INNER JOIN Decks_cards dc ON c.id = dc.id_Card
+     WHERE dc.id_Deck = ?`,
+    [deckId],
+  );
+  return { data: helper.emptyOrRows(rows) };
 }
 
-module.exports = {
-  getMultiple,
-};
+module.exports = { getByDeck };
