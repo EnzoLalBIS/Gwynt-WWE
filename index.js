@@ -3,14 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 let port = 3000;
-const Cards = require("./route/getCards")
-const CardsEffects = require("./route/getCardsEffects")
-const Cardsparam = require("./route/getCardsparam")
-const Deck = require("./route/getDeck")
-const DeckCards = require("./route/getDeckCards")
-const Effects = require("./route/getEffects")
-const Effectsparam = require("./route/getEffectsparam")
-const Users = require("./route/getUsers")
 const postUsers = require("./route/postUsers");
 const putUsers = require("./route/putUsers");
 const putDeckUser = require("./route/putDeckUser");
@@ -20,7 +12,7 @@ const postDeckCard = require("./route/postDeckCard");
 const corsOptions = {
   origin: "*",
   credentials: true,
-  optionSuccessStatus: 200
+  optionSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
@@ -29,11 +21,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(
   express.urlencoded({
-    extended: true
-  })
+    extended: true,
+  }),
 );
-
-
 
 // Routes
 app.use("/cards", Cards);
@@ -47,7 +37,7 @@ app.use("/Users", Users);
 app.use("/postUsers", postUsers);
 app.use("/putUsers", putUsers);
 app.use("/putDeckUser", putDeckUser);
-app.use("/postDeckCard", putDeckUser);
+app.use("/postDeckCard", postDeckCard);
 // app.get("/", (req, res) => {
 //   res.send("Je suis une saucisse");
 // });
@@ -68,12 +58,3 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
-
-let server = app.listen(8081, () => {
-  let host = server.address().address;
-  let port = server.address().port;
-
-  console.log(`Server listening at http://localhost:${port}`);
-});
-
-app.use(express.static("public"));

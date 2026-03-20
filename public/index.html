@@ -1,15 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Kayfabe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+</style>
 </head>
+<!--  début code Enzo Lance le react et l'import dans l'html-->
 <body>
-    
-    <div style="background-color: aqua;">
-        <p>YO</p>
-    </div>
-    <script src="script.js"></script>
+
+<div id="root"></div>
+
+<script src="/bundle.js"></script>
+
+<!--  Fin code Enzo -->
+
+<!--  début code Erwan -->
+<script src="/gameFeature/gameFetch.js"></script>
+    <script src="/gameFeature/gameState.js"></script>
+    <script src="/gameFeature/gameInit.js"></script>
+    <script src="/gameFeature/gameLoop.js"></script>
+    <script>
+      initGame(1, 2).then((state) => {
+        console.log("Game state ready", state);
+
+        // Player 1 plays first card on inRing
+        playCard(state, 1, 0, "inRing");
+
+        // Player 2 plays first card on hype
+        playCard(state, 2, 0, "hype");
+
+        // Player 1 passes
+        passTurn(state, 1);
+
+        // Player 2 passes - game ends
+        passTurn(state, 2);
+      });
+    </script>
+  <!--  Fin code Erwan -->
+
 </body>
 </html>
