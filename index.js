@@ -2,7 +2,16 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-let port = 3000;
+
+// Route imports
+const Cards = require("./route/getCards");
+const CardsEffects = require("./route/getCardsEffects");
+const Cardsparam = require("./route/getCardsparam");
+const Deck = require("./route/getDeck");
+const DeckCards = require("./route/getDeckCards");
+const Effects = require("./route/getEffects");
+const Effectsparam = require("./route/getEffectsparam");
+const Users = require("./route/getUsers");
 const postUsers = require("./route/postUsers");
 const putUsers = require("./route/putUsers");
 const putDeckUser = require("./route/putDeckUser");
@@ -25,6 +34,9 @@ app.use(
   }),
 );
 
+// Static files
+app.use(express.static("public"));
+
 // Routes
 app.use("/cards", Cards);
 app.use("/cardsEffects", CardsEffects);
@@ -38,13 +50,6 @@ app.use("/postUsers", postUsers);
 app.use("/putUsers", putUsers);
 app.use("/putDeckUser", putDeckUser);
 app.use("/postDeckCard", postDeckCard);
-// app.get("/", (req, res) => {
-//   res.send("Je suis une saucisse");
-// });
-
-// app.get("/store", (req, res) => {
-//   res.send("Ceci est un store du cul");
-// });
 
 // Error Handler
 app.use((err, req, res, next) => {
@@ -55,6 +60,8 @@ app.use((err, req, res, next) => {
 });
 
 // Server Launch
-app.listen(port, () => {
-  console.log(`App is running on port ${port}`);
+let server = app.listen(8081, () => {
+  let host = server.address().address;
+  let port = server.address().port;
+  console.log(`Server listening at http://localhost:${port}`);
 });

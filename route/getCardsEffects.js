@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const getUsers = require("../services/getCardsparam");
+const getCardsEffects = require("../services/getCardsEffects");
 
-router.get("/{:type}", async function (req, res, next) {
+router.get("/:cardId", async function (req, res, next) {
   try {
-    console.log(req.query.type);
-    
-    res.json(await getCards.getMultiple(req.query.page, req.query.type));
+    const cardId = req.params.cardId;
+    console.log("Fetching effects for card:", cardId);
+    res.json(await getCardsEffects.getByCard(cardId));
   } catch (err) {
-    console.error(`Error while getting the users`, err.message);
+    console.error(`Error while getting card effects`, err.message);
     next(err);
   }
 });

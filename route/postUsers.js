@@ -2,21 +2,22 @@ const express = require("express");
 const router = express.Router();
 const users = require("../services/postUsers");
 
-router.get("/test", (req, res) => {
-  res.send("TEST OK");
-});
-
 router.post("/create", async function (req, res, next) {
   try {
     res.json(await users.create(req.body));
   } catch (err) {
-    console.error(`Erreur lors de la création du compte`, err.message);
+    console.error(`Error creating account`, err.message);
     next(err);
   }
 });
 
-router.get("/create", (req, res) => {
-  res.send("Route create fonctionne");
+router.post("/login", async function (req, res, next) {
+  try {
+    res.json(await users.login(req.body));
+  } catch (err) {
+    console.error(`Error during login`, err.message);
+    next(err);
+  }
 });
 
 module.exports = router;
