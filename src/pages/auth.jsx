@@ -2,63 +2,140 @@ import React, { useState } from "react";
 
 export default function AuthScreen({ onContinue }) {
   const [mode, setMode] = useState("login");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit() {
+    setError("");
+
+    if (!userName || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    if (mode === "register" && password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      if (mode === "register") {
+        const res = await fetch("http://localhost:8081/postUsers/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ user_Name: userName, password }),
+        });
+        const json = await res.json();
+
+        if (json.message !== "Account created successfully") {
+          setError(json.message);
+          setLoading(false);
+          return;
+        }
+
+        // Auto switch to login after register
+        setMode("login");
+        setError("");
+        setLoading(false);
+        return;
+      }
+
+      // Login
+      const res = await fetch("http://localhost:8081/postUsers/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_Name: userName, password }),
+      });
+      const json = await res.json();
+
+      if (!json.success) {
+        setError(json.message);
+        setLoading(false);
+        return;
+      }
+
+      onContinue(json.user);
+    } catch (err) {
+      setError("Server error, please try again");
+      setLoading(false);
+    }
+  }
 
   return (
     <div style={container}>
-
-      {/* Logo */}
       <img src="/assets/logo.png" style={logo} alt="logo" />
 
       <div style={box}>
-
-        {/* Tabs */}
         <div style={tabs}>
           <button
-            onClick={() => setMode("login")}
-            style={{
-              ...tab,
-              ...(mode === "login" ? activeTab : {})
+            onClick={() => {
+              setMode("login");
+              setError("");
             }}
+            style={{ ...tab, ...(mode === "login" ? activeTab : {}) }}
           >
             Login
           </button>
-
           <button
-            onClick={() => setMode("register")}
-            style={{
-              ...tab,
-              ...(mode === "register" ? activeTab : {})
+            onClick={() => {
+              setMode("register");
+              setError("");
             }}
+            style={{ ...tab, ...(mode === "register" ? activeTab : {}) }}
           >
             Register
           </button>
         </div>
 
-        {/* Inputs */}
-        <input placeholder="Email" style={input} />
+        <input
+          placeholder="Username"
+          style={input}
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+        />
 
-        <input placeholder="Password" type="password" style={input} />
+        <input
+          placeholder="Password"
+          type="password"
+          style={input}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
         {mode === "register" && (
           <input
             placeholder="Confirm password"
             type="password"
             style={input}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         )}
 
-        {/* CTA */}
-        <button style={button} onClick={onContinue}>
-          {mode === "login" ? "Enter Kayfabe" : "Create Account"}
+        {error && (
+          <div
+            style={{ color: "#ff4444", fontSize: "12px", textAlign: "center" }}
+          >
+            {error}
+          </div>
+        )}
+
+        <button style={button} onClick={handleSubmit} disabled={loading}>
+          {loading
+            ? "..."
+            : mode === "login"
+              ? "Enter Kayfabe"
+              : "Create Account"}
         </button>
-
       </div>
-
     </div>
   );
 }
-
-/* ===================== STYLES ===================== */
 
 const container = {
   height: "100vh",
@@ -67,13 +144,13 @@ const container = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  fontFamily: "'Russo One', sans-serif"
+  fontFamily: "'Russo One', sans-serif",
 };
 
 const logo = {
   width: "140px",
   marginBottom: "20px",
-  filter: "drop-shadow(0 0 20px rgba(252,166,22,0.6))"
+  filter: "drop-shadow(0 0 20px rgba(252,166,22,0.6))",
 };
 
 const box = {
@@ -85,13 +162,13 @@ const box = {
   width: "300px",
   display: "flex",
   flexDirection: "column",
-  gap: "12px"
+  gap: "12px",
 };
 
 const tabs = {
   display: "flex",
   gap: "10px",
-  marginBottom: "10px"
+  marginBottom: "10px",
 };
 
 const tab = {
@@ -102,12 +179,12 @@ const tab = {
   border: "none",
   color: "white",
   opacity: 0.6,
-  fontFamily: "'Russo One', sans-serif"
+  fontFamily: "'Russo One', sans-serif",
 };
 
 const activeTab = {
   opacity: 1,
-  WebkitTextStroke: "1px #FCA616"
+  WebkitTextStroke: "1px #FCA616",
 };
 
 const input = {
@@ -115,7 +192,7 @@ const input = {
   borderRadius: "8px",
   border: "1px solid #FCA616",
   background: "#0c1424",
-  color: "white"
+  color: "white",
 };
 
 const button = {
@@ -126,5 +203,5 @@ const button = {
   background: "#FCA616",
   color: "black",
   fontWeight: "bold",
-  cursor: "pointer"
+  cursor: "pointer",
 };
