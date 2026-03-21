@@ -1329,7 +1329,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React9 = require_react(), Internals = {
+        var React10 = require_react(), Internals = {
           d: {
             f: noop,
             r: function() {
@@ -1347,16 +1347,16 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React9.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React10.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
         exports.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE = Internals;
-        exports.createPortal = function(children, container3) {
+        exports.createPortal = function(children, container4) {
           var key = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : null;
-          if (!container3 || 1 !== container3.nodeType && 9 !== container3.nodeType && 11 !== container3.nodeType)
+          if (!container4 || 1 !== container4.nodeType && 9 !== container4.nodeType && 11 !== container4.nodeType)
             throw Error("Target container is not a DOM element.");
-          return createPortal$1(children, container3, null, key);
+          return createPortal$1(children, container4, null, key);
         };
         exports.flushSync = function(fn) {
           var previousTransition = ReactSharedInternals.T, previousUpdatePriority = Internals.p;
@@ -2882,7 +2882,7 @@
           "number" === type && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React9.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React10.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -3449,15 +3449,15 @@
           );
           return false;
         }
-        function setTextContent(node, text) {
-          if (text) {
+        function setTextContent(node, text2) {
+          if (text2) {
             var firstChild = node.firstChild;
             if (firstChild && firstChild === node.lastChild && 3 === firstChild.nodeType) {
-              firstChild.nodeValue = text;
+              firstChild.nodeValue = text2;
               return;
             }
           }
-          node.textContent = text;
+          node.textContent = text2;
         }
         function camelize(string) {
           return string.replace(hyphenPattern, function(_, character) {
@@ -14996,8 +14996,8 @@
               if (null === targetInst$jscomp$0) return;
               var nodeTag = targetInst$jscomp$0.tag;
               if (3 === nodeTag || 4 === nodeTag) {
-                var container3 = targetInst$jscomp$0.stateNode.containerInfo;
-                if (container3 === targetContainer) break;
+                var container4 = targetInst$jscomp$0.stateNode.containerInfo;
+                if (container4 === targetContainer) break;
                 if (4 === nodeTag)
                   for (nodeTag = targetInst$jscomp$0.return; null !== nodeTag; ) {
                     var grandTag = nodeTag.tag;
@@ -15005,15 +15005,15 @@
                       return;
                     nodeTag = nodeTag.return;
                   }
-                for (; null !== container3; ) {
-                  nodeTag = getClosestInstanceFromNode(container3);
+                for (; null !== container4; ) {
+                  nodeTag = getClosestInstanceFromNode(container4);
                   if (null === nodeTag) return;
                   grandTag = nodeTag.tag;
                   if (5 === grandTag || 6 === grandTag || 26 === grandTag || 27 === grandTag) {
                     targetInst$jscomp$0 = ancestorInst = nodeTag;
                     continue a;
                   }
-                  container3 = container3.parentNode;
+                  container4 = container4.parentNode;
                 }
               }
               targetInst$jscomp$0 = targetInst$jscomp$0.return;
@@ -17152,16 +17152,16 @@
         function commitTextUpdate(textInstance, oldText, newText) {
           textInstance.nodeValue = newText;
         }
-        function warnForReactChildrenConflict(container3) {
-          if (!container3.__reactWarnedAboutChildrenConflict) {
-            var props = container3[internalPropsKey] || null;
+        function warnForReactChildrenConflict(container4) {
+          if (!container4.__reactWarnedAboutChildrenConflict) {
+            var props = container4[internalPropsKey] || null;
             if (null !== props) {
-              var fiber = getInstanceFromNode(container3);
-              null !== fiber && ("string" === typeof props.children || "number" === typeof props.children ? (container3.__reactWarnedAboutChildrenConflict = true, runWithFiberInDEV(fiber, function() {
+              var fiber = getInstanceFromNode(container4);
+              null !== fiber && ("string" === typeof props.children || "number" === typeof props.children ? (container4.__reactWarnedAboutChildrenConflict = true, runWithFiberInDEV(fiber, function() {
                 console.error(
                   'Cannot use a ref on a React element as a container to `createRoot` or `createPortal` if that element also sets "children" text content using React. It should be a leaf with no children. Otherwise it\'s ambiguous which children should be used.'
                 );
-              })) : null != props.dangerouslySetInnerHTML && (container3.__reactWarnedAboutChildrenConflict = true, runWithFiberInDEV(fiber, function() {
+              })) : null != props.dangerouslySetInnerHTML && (container4.__reactWarnedAboutChildrenConflict = true, runWithFiberInDEV(fiber, function() {
                 console.error(
                   'Cannot use a ref on a React element as a container to `createRoot` or `createPortal` if that element also sets "dangerouslySetInnerHTML" using React. It should be a leaf with no children. Otherwise it\'s ambiguous which children should be used.'
                 );
@@ -17175,8 +17175,8 @@
         function removeChild(parentInstance, child) {
           parentInstance.removeChild(child);
         }
-        function removeChildFromContainer(container3, child) {
-          (9 === container3.nodeType ? container3.body : "HTML" === container3.nodeName ? container3.ownerDocument.body : container3).removeChild(child);
+        function removeChildFromContainer(container4, child) {
+          (9 === container4.nodeType ? container4.body : "HTML" === container4.nodeName ? container4.ownerDocument.body : container4).removeChild(child);
         }
         function clearHydrationBoundary(parentInstance, hydrationInstance) {
           var node = hydrationInstance, depth = 0;
@@ -17244,11 +17244,11 @@
           props = void 0 !== props && null !== props && props.hasOwnProperty("display") ? props.display : null;
           instance.style.display = null == props || "boolean" === typeof props ? "" : ("" + props).trim();
         }
-        function unhideTextInstance(textInstance, text) {
-          textInstance.nodeValue = text;
+        function unhideTextInstance(textInstance, text2) {
+          textInstance.nodeValue = text2;
         }
-        function clearContainerSparingly(container3) {
-          var nextNode = container3.firstChild;
+        function clearContainerSparingly(container4) {
+          var nextNode = container4.firstChild;
           nextNode && 10 === nextNode.nodeType && (nextNode = nextNode.nextSibling);
           for (; nextNode; ) {
             var node = nextNode;
@@ -17266,7 +17266,7 @@
               case "LINK":
                 if ("stylesheet" === node.rel.toLowerCase()) continue;
             }
-            container3.removeChild(node);
+            container4.removeChild(node);
           }
         }
         function canHydrateInstance(instance, type, props, inRootOrSingleton) {
@@ -17310,8 +17310,8 @@
           }
           return null;
         }
-        function canHydrateTextInstance(instance, text, inRootOrSingleton) {
-          if ("" === text) return null;
+        function canHydrateTextInstance(instance, text2, inRootOrSingleton) {
+          if ("" === text2) return null;
           for (; 3 !== instance.nodeType; ) {
             if ((1 !== instance.nodeType || "INPUT" !== instance.nodeName || "hidden" !== instance.type) && !inRootOrSingleton)
               return null;
@@ -17374,8 +17374,8 @@
           }
           return 8 === instance.nodeType ? instance.data === ACTIVITY_START_DATA ? { type: "Activity", props: {} } : { type: "Suspense", props: {} } : instance.nodeValue;
         }
-        function diffHydratedTextForDevWarnings(textInstance, text, parentProps) {
-          return null === parentProps || true !== parentProps[SUPPRESS_HYDRATION_WARNING] ? (textInstance.nodeValue === text ? textInstance = null : (text = normalizeMarkupForTextOrAttribute(text), textInstance = normalizeMarkupForTextOrAttribute(textInstance.nodeValue) === text ? null : textInstance.nodeValue), textInstance) : null;
+        function diffHydratedTextForDevWarnings(textInstance, text2, parentProps) {
+          return null === parentProps || true !== parentProps[SUPPRESS_HYDRATION_WARNING] ? (textInstance.nodeValue === text2 ? textInstance = null : (text2 = normalizeMarkupForTextOrAttribute(text2), textInstance = normalizeMarkupForTextOrAttribute(textInstance.nodeValue) === text2 ? null : textInstance.nodeValue), textInstance) : null;
         }
         function getNextHydratableInstanceAfterHydrationBoundary(hydrationInstance) {
           hydrationInstance = hydrationInstance.nextSibling;
@@ -17408,8 +17408,8 @@
           }
           return null;
         }
-        function commitHydratedContainer(container3) {
-          retryIfBlockedOn(container3);
+        function commitHydratedContainer(container4) {
+          retryIfBlockedOn(container4);
         }
         function commitHydratedActivityInstance(activityInstance) {
           retryIfBlockedOn(activityInstance);
@@ -17479,8 +17479,8 @@
             instance.removeAttributeNode(attributes[0]);
           detachDeletedInstance(instance);
         }
-        function getHoistableRoot(container3) {
-          return "function" === typeof container3.getRootNode ? container3.getRootNode() : 9 === container3.nodeType ? container3 : container3.ownerDocument;
+        function getHoistableRoot(container4) {
+          return "function" === typeof container4.getRootNode ? container4.getRootNode() : 9 === container4.nodeType ? container4 : container4.ownerDocument;
         }
         function preconnectAs(rel, href, crossOrigin) {
           var ownerDocument = globalDocument;
@@ -17959,10 +17959,10 @@
           parentComponent = emptyContextObject;
           return parentComponent;
         }
-        function updateContainerImpl(rootFiber, lane, element, container3, parentComponent, callback) {
+        function updateContainerImpl(rootFiber, lane, element, container4, parentComponent, callback) {
           if (injectedHook && "function" === typeof injectedHook.onScheduleFiberRoot)
             try {
-              injectedHook.onScheduleFiberRoot(rendererID, container3, element);
+              injectedHook.onScheduleFiberRoot(rendererID, container4, element);
             } catch (err) {
               hasLoggedError || (hasLoggedError = true, console.error(
                 "React instrumentation encountered an error: %o",
@@ -17970,19 +17970,19 @@
               ));
             }
           parentComponent = getContextForSubtree(parentComponent);
-          null === container3.context ? container3.context = parentComponent : container3.pendingContext = parentComponent;
+          null === container4.context ? container4.context = parentComponent : container4.pendingContext = parentComponent;
           isRendering && null !== current && !didWarnAboutNestedUpdates && (didWarnAboutNestedUpdates = true, console.error(
             "Render methods should be a pure function of props and state; triggering nested component updates from render is not allowed. If necessary, trigger nested updates in componentDidUpdate.\n\nCheck the render method of %s.",
             getComponentNameFromFiber(current) || "Unknown"
           ));
-          container3 = createUpdate(lane);
-          container3.payload = { element };
+          container4 = createUpdate(lane);
+          container4.payload = { element };
           callback = void 0 === callback ? null : callback;
           null !== callback && ("function" !== typeof callback && console.error(
             "Expected the last optional `callback` argument to be a function. Instead received: %s.",
             callback
-          ), container3.callback = callback);
-          element = enqueueUpdate(rootFiber, container3, lane);
+          ), container4.callback = callback);
+          element = enqueueUpdate(rootFiber, container4, lane);
           null !== element && (startUpdateTimerByLane(lane, "root.render()", null), scheduleUpdateOnFiber(element, rootFiber, lane), entangleTransitions(element, rootFiber, lane));
         }
         function markRetryLaneImpl(fiber, retryLane) {
@@ -18015,22 +18015,22 @@
         function getCurrentFiberForDevTools() {
           return current;
         }
-        function dispatchDiscreteEvent(domEventName, eventSystemFlags, container3, nativeEvent) {
+        function dispatchDiscreteEvent(domEventName, eventSystemFlags, container4, nativeEvent) {
           var prevTransition = ReactSharedInternals.T;
           ReactSharedInternals.T = null;
           var previousPriority = ReactDOMSharedInternals.p;
           try {
-            ReactDOMSharedInternals.p = DiscreteEventPriority, dispatchEvent(domEventName, eventSystemFlags, container3, nativeEvent);
+            ReactDOMSharedInternals.p = DiscreteEventPriority, dispatchEvent(domEventName, eventSystemFlags, container4, nativeEvent);
           } finally {
             ReactDOMSharedInternals.p = previousPriority, ReactSharedInternals.T = prevTransition;
           }
         }
-        function dispatchContinuousEvent(domEventName, eventSystemFlags, container3, nativeEvent) {
+        function dispatchContinuousEvent(domEventName, eventSystemFlags, container4, nativeEvent) {
           var prevTransition = ReactSharedInternals.T;
           ReactSharedInternals.T = null;
           var previousPriority = ReactDOMSharedInternals.p;
           try {
-            ReactDOMSharedInternals.p = ContinuousEventPriority, dispatchEvent(domEventName, eventSystemFlags, container3, nativeEvent);
+            ReactDOMSharedInternals.p = ContinuousEventPriority, dispatchEvent(domEventName, eventSystemFlags, container4, nativeEvent);
           } finally {
             ReactDOMSharedInternals.p = previousPriority, ReactSharedInternals.T = prevTransition;
           }
@@ -18506,22 +18506,22 @@
         function ReactDOMHydrationRoot(internalRoot) {
           this._internalRoot = internalRoot;
         }
-        function warnIfReactDOMContainerInDEV(container3) {
-          container3[internalContainerInstanceKey] && (container3._reactRootContainer ? console.error(
+        function warnIfReactDOMContainerInDEV(container4) {
+          container4[internalContainerInstanceKey] && (container4._reactRootContainer ? console.error(
             "You are calling ReactDOMClient.createRoot() on a container that was previously passed to ReactDOM.render(). This is not supported."
           ) : console.error(
             "You are calling ReactDOMClient.createRoot() on a container that has already been passed to createRoot() before. Instead, call root.render() on the existing root instead if you want to update it."
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React9 = require_react(), ReactDOM2 = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React10 = require_react(), ReactDOM2 = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
         /* @__PURE__ */ Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
         /* @__PURE__ */ Symbol.for("react.legacy_hidden");
         /* @__PURE__ */ Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
         /* @__PURE__ */ Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React9.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM2.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React10.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM2.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21290,13 +21290,13 @@
           args = this._internalRoot;
           if (null !== args) {
             this._internalRoot = null;
-            var container3 = args.containerInfo;
+            var container4 = args.containerInfo;
             (executionContext & (RenderContext | CommitContext)) !== NoContext && console.error(
               "Attempted to synchronously unmount a root while React was already rendering. React cannot finish unmounting the root until the current render has completed, which may lead to a race condition."
             );
             updateContainerImpl(args.current, 2, null, args, null, null);
             flushSyncWork$1();
-            container3[internalContainerInstanceKey] = null;
+            container4[internalContainerInstanceKey] = null;
           }
         };
         ReactDOMHydrationRoot.prototype.unstable_scheduleHydration = function(target) {
@@ -21309,7 +21309,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React9.version;
+          var isomorphicReactPackageVersion = React10.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21363,10 +21363,10 @@
             "font-weight:bold"
           );
         }
-        exports.createRoot = function(container3, options) {
-          if (!isValidContainer(container3))
+        exports.createRoot = function(container4, options) {
+          if (!isValidContainer(container4))
             throw Error("Target container is not a DOM element.");
-          warnIfReactDOMContainerInDEV(container3);
+          warnIfReactDOMContainerInDEV(container4);
           var isStrictMode = false, identifierPrefix = "", onUncaughtError = defaultOnUncaughtError, onCaughtError = defaultOnCaughtError, onRecoverableError = defaultOnRecoverableError;
           null !== options && void 0 !== options && (options.hydrate ? console.warn(
             "hydrate through createRoot is deprecated. Use ReactDOMClient.hydrateRoot(container, <App />) instead."
@@ -21374,7 +21374,7 @@
             "You passed a JSX element to createRoot. You probably meant to call root.render instead. Example usage:\n\n  let root = createRoot(domContainer);\n  root.render(<App />);"
           ), true === options.unstable_strictMode && (isStrictMode = true), void 0 !== options.identifierPrefix && (identifierPrefix = options.identifierPrefix), void 0 !== options.onUncaughtError && (onUncaughtError = options.onUncaughtError), void 0 !== options.onCaughtError && (onCaughtError = options.onCaughtError), void 0 !== options.onRecoverableError && (onRecoverableError = options.onRecoverableError));
           options = createFiberRoot(
-            container3,
+            container4,
             1,
             false,
             null,
@@ -21387,21 +21387,21 @@
             onRecoverableError,
             defaultOnDefaultTransitionIndicator
           );
-          container3[internalContainerInstanceKey] = options.current;
-          listenToAllSupportedEvents(container3);
+          container4[internalContainerInstanceKey] = options.current;
+          listenToAllSupportedEvents(container4);
           return new ReactDOMRoot(options);
         };
-        exports.hydrateRoot = function(container3, initialChildren, options) {
-          if (!isValidContainer(container3))
+        exports.hydrateRoot = function(container4, initialChildren, options) {
+          if (!isValidContainer(container4))
             throw Error("Target container is not a DOM element.");
-          warnIfReactDOMContainerInDEV(container3);
+          warnIfReactDOMContainerInDEV(container4);
           void 0 === initialChildren && console.error(
             "Must provide initial children as second argument to hydrateRoot. Example usage: hydrateRoot(domContainer, <App />)"
           );
           var isStrictMode = false, identifierPrefix = "", onUncaughtError = defaultOnUncaughtError, onCaughtError = defaultOnCaughtError, onRecoverableError = defaultOnRecoverableError, formState = null;
           null !== options && void 0 !== options && (true === options.unstable_strictMode && (isStrictMode = true), void 0 !== options.identifierPrefix && (identifierPrefix = options.identifierPrefix), void 0 !== options.onUncaughtError && (onUncaughtError = options.onUncaughtError), void 0 !== options.onCaughtError && (onCaughtError = options.onCaughtError), void 0 !== options.onRecoverableError && (onRecoverableError = options.onRecoverableError), void 0 !== options.formState && (formState = options.formState));
           initialChildren = createFiberRoot(
-            container3,
+            container4,
             1,
             true,
             initialChildren,
@@ -21426,8 +21426,8 @@
           initialChildren.current.lanes = options;
           markRootUpdated$1(initialChildren, options);
           ensureRootIsScheduled(initialChildren);
-          container3[internalContainerInstanceKey] = initialChildren.current;
-          listenToAllSupportedEvents(container3);
+          container4[internalContainerInstanceKey] = initialChildren.current;
+          listenToAllSupportedEvents(container4);
           return new ReactDOMHydrationRoot(initialChildren);
         };
         exports.version = "19.2.4";
@@ -21450,7 +21450,7 @@
   });
 
   // src/script.jsx
-  var import_react8 = __toESM(require_react());
+  var import_react9 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // src/pages/auth.jsx
@@ -21626,7 +21626,7 @@
 
   // src/pages/mainMenu.jsx
   var import_react2 = __toESM(require_react());
-  function MainMenu({ startGame }) {
+  function MainMenu({ startGame, setScreen }) {
     return /* @__PURE__ */ import_react2.default.createElement("div", { style: container2 }, /* @__PURE__ */ import_react2.default.createElement("img", { src: "/assets/logo.png", alt: "logo", style: logo2 }), /* @__PURE__ */ import_react2.default.createElement("div", { style: menuBox }, /* @__PURE__ */ import_react2.default.createElement(
       MenuItem,
       {
@@ -21646,15 +21646,22 @@
         title: "Global Ranking",
         subtitle: "Compete with other bookers"
       }
-    )), /* @__PURE__ */ import_react2.default.createElement("div", { style: lines }), /* @__PURE__ */ import_react2.default.createElement("img", { src: "/assets/img_user.png", alt: "badge", style: badge }));
+    )), /* @__PURE__ */ import_react2.default.createElement("div", { style: lines }), /* @__PURE__ */ import_react2.default.createElement(
+      "div",
+      {
+        onClick: () => setScreen("account"),
+        style: { cursor: "pointer" }
+      },
+      /* @__PURE__ */ import_react2.default.createElement("img", { src: "/assets/img_user.png", alt: "badge", style: badge })
+    ));
   }
-  function MenuItem({ title, subtitle, onClick }) {
+  function MenuItem({ title: title2, subtitle, onClick }) {
     return /* @__PURE__ */ import_react2.default.createElement(
       "div",
       {
         style: menuItem,
         onClick: () => {
-          console.log("CLICK WORKS:", title);
+          console.log("CLICK WORKS:", title2);
           if (onClick) onClick();
         },
         onMouseEnter: (e) => {
@@ -21666,7 +21673,7 @@
           e.currentTarget.style.background = "transparent";
         }
       },
-      /* @__PURE__ */ import_react2.default.createElement("div", { style: menuTitle }, title),
+      /* @__PURE__ */ import_react2.default.createElement("div", { style: menuTitle }, title2),
       /* @__PURE__ */ import_react2.default.createElement("div", { style: menuSubtitle }, subtitle)
     );
   }
@@ -21839,10 +21846,10 @@
         /* @__PURE__ */ import_react3.default.createElement("span", null, label),
         /* @__PURE__ */ import_react3.default.createElement("span", { style: { fontSize: "12px" } }, score)
       ),
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { display: "flex", gap: "4px", flex: 1 } }, cards.map((card, i) => /* @__PURE__ */ import_react3.default.createElement(FieldCard, { key: i, card })), [...Array(Math.max(0, 5 - cards.length))].map((_, i) => /* @__PURE__ */ import_react3.default.createElement(CardSlot, { key: `empty-${i}` })))
+      /* @__PURE__ */ import_react3.default.createElement("div", { style: { display: "flex", gap: "4px", flex: 1 } }, cards.map((card2, i) => /* @__PURE__ */ import_react3.default.createElement(FieldCard, { key: i, card: card2 })), [...Array(Math.max(0, 5 - cards.length))].map((_, i) => /* @__PURE__ */ import_react3.default.createElement(CardSlot, { key: `empty-${i}` })))
     );
   }
-  function FieldCard({ card }) {
+  function FieldCard({ card: card2 }) {
     return /* @__PURE__ */ import_react3.default.createElement(
       "div",
       {
@@ -21858,11 +21865,11 @@
           flexShrink: 0
         }
       },
-      card.img ? /* @__PURE__ */ import_react3.default.createElement(
+      card2.img ? /* @__PURE__ */ import_react3.default.createElement(
         "img",
         {
-          src: `http://localhost:8081/assets/image/${card.img}`,
-          alt: card.name,
+          src: `http://localhost:8081/assets/image/${card2.img}`,
+          alt: card2.name,
           style: {
             width: "100%",
             height: "100%",
@@ -21904,7 +21911,7 @@
               textAlign: "center"
             }
           },
-          card.name
+          card2.name
         ),
         /* @__PURE__ */ import_react3.default.createElement(
           "div",
@@ -21916,7 +21923,7 @@
               textAlign: "center"
             }
           },
-          card.dmg
+          card2.dmg
         )
       )
     );
@@ -21980,7 +21987,7 @@
       )
     );
   }
-  function PlayerCard({ title, player, score, onPass, playerPassed }) {
+  function PlayerCard({ title: title2, player, score, onPass, playerPassed }) {
     return /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
@@ -22009,7 +22016,7 @@
             textTransform: "uppercase"
           }
         },
-        title
+        title2
       ),
       /* @__PURE__ */ import_react4.default.createElement(
         "div",
@@ -22099,22 +22106,22 @@
   // src/components/playerHand.jsx
   var import_react6 = __toESM(require_react());
   function PlayerHand({ cards = [], selectedCard, onCardSelect }) {
-    return /* @__PURE__ */ import_react6.default.createElement("div", { style: handContainer }, /* @__PURE__ */ import_react6.default.createElement("div", { style: handScroller }, cards.map((card, i) => {
+    return /* @__PURE__ */ import_react6.default.createElement("div", { style: handContainer }, /* @__PURE__ */ import_react6.default.createElement("div", { style: handScroller }, cards.map((card2, i) => {
       const rotation = (i - cards.length / 2) * 2;
       const isSelected = selectedCard && selectedCard.index === i;
       return /* @__PURE__ */ import_react6.default.createElement(
         CardItem,
         {
-          key: card.id || i,
-          card,
+          key: card2.id || i,
+          card: card2,
           rotation,
           isSelected,
-          onClick: () => onCardSelect(card, i)
+          onClick: () => onCardSelect(card2, i)
         }
       );
     })));
   }
-  function CardItem({ card, rotation, isSelected, onClick }) {
+  function CardItem({ card: card2, rotation, isSelected, onClick }) {
     return /* @__PURE__ */ import_react6.default.createElement(
       "div",
       {
@@ -22137,11 +22144,11 @@
           e.currentTarget.style.zIndex = 1;
         }
       },
-      /* @__PURE__ */ import_react6.default.createElement("div", { style: { position: "relative", width: "100%", flex: 1 } }, card.img ? /* @__PURE__ */ import_react6.default.createElement(
+      /* @__PURE__ */ import_react6.default.createElement("div", { style: { position: "relative", width: "100%", flex: 1 } }, card2.img ? /* @__PURE__ */ import_react6.default.createElement(
         "img",
         {
-          src: `http://localhost:8081/assets/image/${card.img}`,
-          alt: card.name,
+          src: `http://localhost:8081/assets/image/${card2.img}`,
+          alt: card2.name,
           style: {
             position: "absolute",
             top: 0,
@@ -22173,8 +22180,8 @@
             flexShrink: 0
           }
         },
-        /* @__PURE__ */ import_react6.default.createElement("div", { style: cardNameStyle }, card.name),
-        /* @__PURE__ */ import_react6.default.createElement("div", { style: cardDmgStyle }, card.dmg)
+        /* @__PURE__ */ import_react6.default.createElement("div", { style: cardNameStyle }, card2.name),
+        /* @__PURE__ */ import_react6.default.createElement("div", { style: cardDmgStyle }, card2.dmg)
       )
     );
   }
@@ -22327,8 +22334,8 @@
   function drawCards(player, amount) {
     for (let i = 0; i < amount; i++) {
       if (player.deck.length === 0) break;
-      const card = player.deck.pop();
-      player.hand.push(card);
+      const card2 = player.deck.pop();
+      player.hand.push(card2);
     }
   }
   async function initGame(deck1Id, deck2Id) {
@@ -22364,8 +22371,8 @@
     const rows = ["boost", "hype", "inRing"];
     let allCards = [];
     rows.forEach((row) => {
-      enemy.field[row].cards.forEach((card, index) => {
-        allCards.push({ card, row, index });
+      enemy.field[row].cards.forEach((card2, index) => {
+        allCards.push({ card: card2, row, index });
       });
     });
     if (allCards.length === 0) {
@@ -22385,11 +22392,11 @@
     state.calculateScore(enemyId);
     state.addLog(`Player ${enemyId} score updated: ${enemy.score}`);
   }
-  function applyBoostSelf(card, playerId, dmg, state) {
-    card.dmg += dmg;
+  function applyBoostSelf(card2, playerId, dmg, state) {
+    card2.dmg += dmg;
     state.calculateScore(playerId);
     state.addLog(
-      `Player ${playerId} card ${card.name} boosted to ${card.dmg} dmg`
+      `Player ${playerId} card ${card2.name} boosted to ${card2.dmg} dmg`
     );
   }
   function applyBoostAlly(playerId, dmg, state) {
@@ -22397,16 +22404,16 @@
     const rows = ["boost", "hype", "inRing"];
     let allCards = [];
     rows.forEach((row) => {
-      player.field[row].cards.forEach((card) => {
-        allCards.push(card);
+      player.field[row].cards.forEach((card2) => {
+        allCards.push(card2);
       });
     });
     if (allCards.length === 0) {
       state.addLog(`No ally cards on field to boost`);
       return;
     }
-    allCards.forEach((card) => {
-      card.dmg += dmg;
+    allCards.forEach((card2) => {
+      card2.dmg += dmg;
     });
     state.calculateScore(playerId);
     state.addLog(
@@ -22429,16 +22436,16 @@
       `Player ${playerId} spawned ${token.name} on ${row} - new score: ${state.players[playerId].score}`
     );
   }
-  async function triggerOnPlayEffect(card, playerId, state, targetCardIndex = null, row = "inRing") {
-    if (!card.effect) return;
-    const effectData = await fetchCardEffect(card.id);
+  async function triggerOnPlayEffect(card2, playerId, state, targetCardIndex = null, row = "inRing") {
+    if (!card2.effect) return;
+    const effectData = await fetchCardEffect(card2.id);
     if (!effectData) {
-      state.addLog(`No effect data found for ${card.name}`);
+      state.addLog(`No effect data found for ${card2.name}`);
       return;
     }
     if (effectData.effect_trigger !== "on_play") return;
     const enemyId = playerId === 1 ? 2 : 1;
-    state.addLog(`${card.name} triggers: ${effectData.description}`);
+    state.addLog(`${card2.name} triggers: ${effectData.description}`);
     switch (effectData.state) {
       case "damage_enemy":
         applyDamage(enemyId, effectData.dmg, state);
@@ -22451,7 +22458,7 @@
         applyDebuff(enemyId, targetCardIndex, effectData.dmg, state);
         break;
       case "boost_self":
-        applyBoostSelf(card, playerId, effectData.dmg, state);
+        applyBoostSelf(card2, playerId, effectData.dmg, state);
         break;
       case "boost_ally":
         applyBoostAlly(playerId, effectData.dmg, state);
@@ -22467,17 +22474,17 @@
     const player = state.players[playerId];
     const rows = ["boost", "hype", "inRing"];
     for (const row of rows) {
-      for (const card of player.field[row].cards) {
-        if (!card.effect) continue;
-        const effectData = await fetchCardEffect(card.id);
+      for (const card2 of player.field[row].cards) {
+        if (!card2.effect) continue;
+        const effectData = await fetchCardEffect(card2.id);
         if (!effectData) continue;
         if (effectData.effect_trigger !== "on_turn_start") continue;
         state.addLog(
-          `${card.name} triggers on turn start: ${effectData.description}`
+          `${card2.name} triggers on turn start: ${effectData.description}`
         );
         switch (effectData.state) {
           case "boost_self":
-            applyBoostSelf(card, playerId, effectData.dmg, state);
+            applyBoostSelf(card2, playerId, effectData.dmg, state);
             break;
           default:
             state.addLog(`Unknown on_turn_start effect: ${effectData.state}`);
@@ -22518,10 +22525,10 @@
       console.log(`Row ${row} is full for player ${playerId}`);
       return false;
     }
-    const card = player.hand.splice(cardIndex, 1)[0];
-    player.field[row].cards.push(card);
-    state.addLog(`Player ${playerId} played ${card.name} on ${row}`);
-    await triggerOnPlayEffect(card, playerId, state, targetCardIndex, row);
+    const card2 = player.hand.splice(cardIndex, 1)[0];
+    player.field[row].cards.push(card2);
+    state.addLog(`Player ${playerId} played ${card2.name} on ${row}`);
+    await triggerOnPlayEffect(card2, playerId, state, targetCardIndex, row);
     state.calculateScore(playerId);
     state.addLog(`Player ${playerId} score: ${player.score}`);
     drawCard(state, playerId);
@@ -22537,9 +22544,9 @@
       console.log(`Player ${playerId} has no cards left in deck`);
       return;
     }
-    const card = player.deck.pop();
-    player.hand.push(card);
-    state.addLog(`Player ${playerId} drew ${card.name}`);
+    const card2 = player.deck.pop();
+    player.hand.push(card2);
+    state.addLog(`Player ${playerId} drew ${card2.name}`);
   }
   function passTurn(state, playerId) {
     const player = state.players[playerId];
@@ -22661,7 +22668,7 @@
         syncRender();
       });
     }, []);
-    function handleCardSelect(card, index) {
+    function handleCardSelect(card2, index) {
       if (selectedCard && selectedCard.index === index) {
         setSelectedCard(null);
         return;
@@ -22783,12 +22790,171 @@
     );
   }
 
+  // src/pages/account.jsx
+  var import_react8 = __toESM(require_react());
+  function Account({ setScreen }) {
+    const [volume, setVolume] = (0, import_react8.useState)(50);
+    const [selectedDeck, setSelectedDeck] = (0, import_react8.useState)("Bloodline Control");
+    const decks = [
+      "Bloodline Control",
+      "High Flyer",
+      "Powerhouse"
+    ];
+    const user = {
+      pseudo: "Enzo",
+      deck: selectedDeck
+    };
+    return /* @__PURE__ */ import_react8.default.createElement("div", { style: container3 }, /* @__PURE__ */ import_react8.default.createElement(
+      "div",
+      {
+        onClick: () => setScreen("menu"),
+        style: backButton,
+        onMouseEnter: (e) => {
+          e.currentTarget.style.transform = "scale(1.1)";
+          e.currentTarget.style.boxShadow = "0 0 15px rgba(252,166,22,0.9)";
+        },
+        onMouseLeave: (e) => {
+          e.currentTarget.style.transform = "scale(1)";
+          e.currentTarget.style.boxShadow = "0 0 10px rgba(252,166,22,0.5)";
+        }
+      },
+      "\u2190 BACK"
+    ), /* @__PURE__ */ import_react8.default.createElement("img", { src: "/assets/logo.png", style: logo3 }), /* @__PURE__ */ import_react8.default.createElement("div", { style: title }, "ACCOUNT"), /* @__PURE__ */ import_react8.default.createElement("div", { style: grid }, /* @__PURE__ */ import_react8.default.createElement(Card2, null, /* @__PURE__ */ import_react8.default.createElement("div", { style: cardTitle }, "STATS"), /* @__PURE__ */ import_react8.default.createElement("div", { style: text }, "\u{1F464} ", user.pseudo), /* @__PURE__ */ import_react8.default.createElement("div", { style: text }, "\u{1F3B4} Deck: ", user.deck), /* @__PURE__ */ import_react8.default.createElement("div", { style: subText }, "Wins: 12"), /* @__PURE__ */ import_react8.default.createElement("div", { style: subText }, "Losses: 5")), /* @__PURE__ */ import_react8.default.createElement(Card2, null, /* @__PURE__ */ import_react8.default.createElement("div", { style: cardTitle }, "SETTINGS"), /* @__PURE__ */ import_react8.default.createElement("div", { style: text }, "\u{1F50A} Volume"), /* @__PURE__ */ import_react8.default.createElement(
+      "input",
+      {
+        type: "range",
+        min: "0",
+        max: "100",
+        value: volume,
+        onChange: (e) => setVolume(e.target.value),
+        style: slider
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement("div", { style: subText }, volume, "%"), /* @__PURE__ */ import_react8.default.createElement("div", { style: button2 }, "Change Password")), /* @__PURE__ */ import_react8.default.createElement(Card2, null, /* @__PURE__ */ import_react8.default.createElement("div", { style: cardTitle }, "DECKS"), decks.map((deck) => {
+      const isActive = deck === selectedDeck;
+      return /* @__PURE__ */ import_react8.default.createElement(
+        "div",
+        {
+          key: deck,
+          onClick: () => setSelectedDeck(deck),
+          style: {
+            padding: "10px",
+            borderRadius: "10px",
+            border: "2px solid #FCA616",
+            cursor: "pointer",
+            transition: "0.2s",
+            background: isActive ? "#FCA616" : "transparent",
+            color: isActive ? "#000" : "#FFFFFF"
+          }
+        },
+        deck
+      );
+    }))));
+  }
+  function Card2({ children }) {
+    return /* @__PURE__ */ import_react8.default.createElement(
+      "div",
+      {
+        style: card,
+        onMouseEnter: (e) => {
+          e.currentTarget.style.transform = "scale(1.05)";
+          e.currentTarget.style.boxShadow = "0 0 30px rgba(252,166,22,0.8)";
+        },
+        onMouseLeave: (e) => {
+          e.currentTarget.style.transform = "scale(1)";
+          e.currentTarget.style.boxShadow = "0 0 20px rgba(252,166,22,0.5)";
+        }
+      },
+      children
+    );
+  }
+  var container3 = {
+    height: "100vh",
+    background: "linear-gradient(180deg, #1e2f52, #0c1424)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    fontFamily: "'Russo One', sans-serif",
+    position: "relative"
+  };
+  var backButton = {
+    position: "absolute",
+    top: "20px",
+    left: "20px",
+    padding: "8px 14px",
+    borderRadius: "10px",
+    border: "2px solid #FCA616",
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontFamily: "'Russo One', sans-serif",
+    background: "rgba(0,0,0,0.6)",
+    boxShadow: "0 0 10px rgba(252,166,22,0.5)",
+    transition: "0.2s"
+  };
+  var logo3 = {
+    width: "120px",
+    marginBottom: "10px",
+    filter: "drop-shadow(0 0 20px rgba(252,166,22,0.6))"
+  };
+  var title = {
+    fontSize: "32px",
+    color: "#fff",
+    marginBottom: "40px",
+    WebkitTextStroke: "1px #FCA616",
+    textShadow: "0 0 10px rgba(252,166,22,0.7)"
+  };
+  var grid = {
+    display: "flex",
+    gap: "40px"
+  };
+  var card = {
+    width: "260px",
+    minHeight: "300px",
+    background: "rgba(0,0,0,0.7)",
+    border: "2px solid #FCA616",
+    borderRadius: "16px",
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    cursor: "pointer",
+    transition: "0.2s",
+    boxShadow: "0 0 20px rgba(252,166,22,0.5)"
+  };
+  var cardTitle = {
+    fontSize: "18px",
+    color: "#fff",
+    WebkitTextStroke: "1px #FCA616",
+    marginBottom: "10px"
+  };
+  var text = {
+    color: "#fff",
+    fontSize: "14px"
+  };
+  var subText = {
+    color: "rgba(255,255,255,0.7)",
+    fontSize: "12px"
+  };
+  var button2 = {
+    marginTop: "15px",
+    padding: "8px",
+    borderRadius: "8px",
+    background: "#FCA616",
+    color: "#000",
+    textAlign: "center",
+    cursor: "pointer"
+  };
+  var slider = {
+    width: "100%"
+  };
+
   // src/script.jsx
   function App() {
-    const [screen, setScreen] = (0, import_react8.useState)("auth");
-    const [currentUser, setCurrentUser] = (0, import_react8.useState)(null);
+    const [screen, setScreen] = (0, import_react9.useState)("auth");
+    const [currentUser, setCurrentUser] = (0, import_react9.useState)(null);
     if (screen === "auth") {
-      return /* @__PURE__ */ import_react8.default.createElement(
+      return /* @__PURE__ */ import_react9.default.createElement(
         AuthScreen,
         {
           onContinue: (user) => {
@@ -22799,13 +22965,16 @@
       );
     }
     if (screen === "menu") {
-      return /* @__PURE__ */ import_react8.default.createElement(MainMenu, { startGame: () => setScreen("game") });
+      return /* @__PURE__ */ import_react9.default.createElement(MainMenu, { startGame: () => setScreen("game"), setScreen });
     }
     if (screen === "game") {
-      return /* @__PURE__ */ import_react8.default.createElement(Game, { currentUser, playerDeckId: 2 });
+      return /* @__PURE__ */ import_react9.default.createElement(Game, { currentUser, playerDeckId: 2 });
+    }
+    if (screen === "account") {
+      return /* @__PURE__ */ import_react9.default.createElement(Account, { setScreen });
     }
   }
-  import_client.default.createRoot(document.getElementById("root")).render(/* @__PURE__ */ import_react8.default.createElement(App, null));
+  import_client.default.createRoot(document.getElementById("root")).render(/* @__PURE__ */ import_react9.default.createElement(App, null));
 })();
 /*! Bundled license information:
 

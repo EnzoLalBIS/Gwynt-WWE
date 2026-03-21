@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function MainMenu({ startGame }) {
+export default function MainMenu({ startGame , setScreen }) {
   return (
     <div style={container}>
 
@@ -32,7 +32,12 @@ export default function MainMenu({ startGame }) {
       <div style={lines}></div>
 
       {/* Badge */}
+      <div
+      onClick={() => setScreen("account")}
+      style={{ cursor: "pointer" }}
+      >
       <img src="/assets/img_user.png" alt="badge" style={badge} />
+      </div>
 
     </div>
   );
