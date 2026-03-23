@@ -1,31 +1,44 @@
 import React from "react";
 
-export default function MainMenu({ startGame }) {
+export default function MainMenu({ startGame, onAccount, currentUser }) {
   return (
     <div style={container}>
+      {/* Account button top right */}
+      <div
+        onClick={onAccount}
+        style={accountBtn}
+        onMouseEnter={(e) =>
+          (e.currentTarget.style.background = "rgba(252,166,22,0.2)")
+        }
+        onMouseLeave={(e) =>
+          (e.currentTarget.style.background = "rgba(0,0,0,0.5)")
+        }
+      >
+        <span
+          style={{ fontSize: "12px", color: "#fca616", letterSpacing: "1px" }}
+        >
+          {currentUser ? currentUser.user_Name.toUpperCase() : "ACCOUNT"}
+        </span>
+      </div>
 
       {/* Logo */}
       <img src="/assets/logo.png" alt="logo" style={logo} />
 
       {/* Menu Box */}
       <div style={menuBox}>
-
         <MenuItem
           title="Career"
           subtitle="Build your legacy as a General Manager"
         />
-
         <MenuItem
           title="One Night Event"
           subtitle="Simulate a one-night show"
           onClick={startGame}
         />
-
         <MenuItem
           title="Global Ranking"
           subtitle="Compete with other bookers"
         />
-
       </div>
 
       {/* Bottom lines */}
@@ -33,7 +46,6 @@ export default function MainMenu({ startGame }) {
 
       {/* Badge */}
       <img src="/assets/img_user.png" alt="badge" style={badge} />
-
     </div>
   );
 }
@@ -71,13 +83,13 @@ const container = {
   justifyContent: "center",
   position: "relative",
   fontFamily: "'Russo One', sans-serif",
-  overflow: "hidden"
+  overflow: "visible", // ← change hidden en visible
 };
 
 const logo = {
   width: "180px",
   marginBottom: "20px",
-  filter: "drop-shadow(0 0 20px rgba(252,166,22,0.6))"
+  filter: "drop-shadow(0 0 20px rgba(252,166,22,0.6))",
 };
 
 const menuBox = {
@@ -86,7 +98,7 @@ const menuBox = {
   padding: "30px 60px",
   background: "rgba(0,0,0,0.7)",
   boxShadow: "0 0 30px rgba(252,166,22,0.6)",
-  textAlign: "center"
+  textAlign: "center",
 };
 
 const menuItem = {
@@ -94,7 +106,7 @@ const menuItem = {
   cursor: "pointer",
   transition: "0.2s ease",
   borderRadius: "10px",
-  padding: "8px 16px"
+  padding: "8px 16px",
 };
 
 const menuTitle = {
@@ -108,14 +120,14 @@ const menuTitle = {
   fontWeight: "800",
   pointerEvents: "none",
   letterSpacing: "0.5px",
-  lineHeight: "1.1" 
+  lineHeight: "1.1",
 };
 
 const menuSubtitle = {
   fontSize: "12px",
   color: "rgba(255,255,255,0.6)",
   marginTop: "2px",
-  pointerEvents: "none"
+  pointerEvents: "none",
 };
 
 const badge = {
@@ -123,7 +135,7 @@ const badge = {
   bottom: "30px",
   right: "30px",
   width: "120px",
-  filter: "drop-shadow(0 0 15px rgba(252,166,22,0.7))"
+  filter: "drop-shadow(0 0 15px rgba(252,166,22,0.7))",
 };
 
 const lines = {
@@ -135,5 +147,17 @@ const lines = {
   boxShadow: `
     0 -6px 0 #fca616,
     0 -12px 0 #fca616
-  `
+  `,
+};
+
+const accountBtn = {
+  position: "absolute",
+  top: "20px",
+  right: "20px",
+  padding: "8px 16px",
+  background: "rgba(0,0,0,0.5)",
+  border: "1px solid #fca616",
+  borderRadius: "8px",
+  cursor: "pointer",
+  transition: "0.2s ease",
 };

@@ -92,13 +92,25 @@ function spawnToken(playerId, row, state) {
     dmg: 2,
     role: "token",
     effect: 0,
-    img: "token.png",
+    img: "jd.png",
   };
 
   state.players[playerId].field[row].cards.push(token);
   state.calculateScore(playerId);
   state.addLog(
     `Player ${playerId} spawned ${token.name} on ${row} - new score: ${state.players[playerId].score}`,
+  );
+}
+
+export async function requiresTarget(card) {
+  if (!card.effect) return false;
+
+  const effectData = await fetchCardEffect(card.id);
+  if (!effectData) return false;
+
+  return (
+    effectData.state === "debuff_enemy" &&
+    effectData.effect_trigger === "on_play"
   );
 }
 

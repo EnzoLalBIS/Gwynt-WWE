@@ -1,31 +1,250 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export default function PlayerHand({ cards = [], selectedCard, onCardSelect }) {
+  const [previewCard, setPreviewCard] = useState(null);
+  const [previewEffect, setPreviewEffect] = useState(null);
+
+  useEffect(() => {
+    if (!previewCard || !previewCard.effect) {
+      setPreviewEffect(null);
+      return;
+    }
+
+    fetch(`http://localhost:8081/cardsEffects/${previewCard.id}`)
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.data && json.data.length > 0) {
+          setPreviewEffect(json.data[0]);
+        }
+      });
+  }, [previewCard]);
+
   return (
-    <div style={handContainer}>
-      <div style={handScroller}>
-        {cards.map((card, i) => {
-          const rotation = (i - cards.length / 2) * 2;
-          const isSelected = selectedCard && selectedCard.index === i;
-          return (
-            <CardItem
-              key={card.id || i}
-              card={card}
-              rotation={rotation}
-              isSelected={isSelected}
-              onClick={() => onCardSelect(card, i)}
-            />
-          );
-        })}
+    <>
+      {previewCard && (
+        <div
+          onClick={() => {
+            setPreviewCard(null);
+            setPreviewEffect(null);
+          }}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.85)",
+            zIndex: 1000,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "linear-gradient(180deg, #1e2f52, #0c1424)",
+              border: "2px solid #fca616",
+              borderRadius: "16px",
+              overflow: "hidden",
+              width: "280px",
+              display: "flex",
+              flexDirection: "column",
+              boxShadow: "0 0 30px rgba(252,166,22,0.6)",
+            }}
+          >
+            {/* Image — full width no crop */}
+            {previewCard.img ? (
+              <img
+                src={`http://localhost:8081/assets/image/${previewCard.img}`}
+                alt={previewCard.name}
+                style={{
+                  width: "100%",
+                  height: "280px",
+                  objectFit: "contain",
+                  background: "rgba(0,0,0,0.5)",
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  height: "280px",
+                  background: "rgba(255,255,255,0.05)",
+                }}
+              />
+            )}
+
+            {/* Info block */}
+            <div
+              style={{
+                padding: "16px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {/* Name */}
+              <div
+                style={{
+                  color: "white",
+                  fontSize: "18px",
+                  fontWeight: "700",
+                  fontFamily: "'Russo One', sans-serif",
+                  textAlign: "center",
+                }}
+              >
+                {previewCard.name}
+              </div>
+
+              {/* DMG */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: "8px",
+                  alignItems: "center",
+                }}
+              >
+                <span style={{ color: "#fca616", fontSize: "14px" }}>
+                  ⚔️ DMG
+                </span>
+                <span
+                  style={{
+                    color: "white",
+                    fontSize: "20px",
+                    fontWeight: "900",
+                  }}
+                >
+                  {previewCard.dmg}
+                </span>
+              </div>
+
+              {/* Description */}
+              <div
+                style={{
+                  color: "rgba(255,255,255,0.7)",
+                  fontSize: "12px",
+                  textAlign: "center",
+                  fontStyle: "italic",
+                }}
+              >
+                {previewCard.description}
+              </div>
+
+              {/* Effect */}
+              {previewEffect && (
+                <div
+                  style={{
+                    background: "rgba(252,166,22,0.1)",
+                    border: "1px solid rgba(252,166,22,0.4)",
+                    borderRadius: "8px",
+                    padding: "10px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "4px",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#fca616",
+                      fontSize: "12px",
+                      fontWeight: "700",
+                      textAlign: "center",
+                    }}
+                  >
+                    ✨ {previewEffect.description}
+                  </div>
+                  <div
+                    style={{
+                      color: "rgba(255,255,255,0.7)",
+                      fontSize: "11px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {previewEffect.state.replace("_", " ")} —{" "}
+                    {previewEffect.dmg > 0
+                      ? `${previewEffect.dmg} dmg`
+                      : "no damage"}
+                  </div>
+                  <div
+                    style={{
+                      color: "rgba(255,255,255,0.5)",
+                      fontSize: "10px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {previewEffect.effect_trigger === "on_play"
+                      ? "Triggers on play"
+                      : "Triggers each turn start"}
+                  </div>
+                </div>
+              )}
+
+              {/* Close hint */}
+              <div
+                style={{
+                  color: "rgba(255,255,255,0.4)",
+                  fontSize: "10px",
+                  textAlign: "center",
+                }}
+              >
+                Click anywhere to close
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div style={handContainer}>
+        <div style={handScroller}>
+          {cards.map((card, i) => {
+            const rotation = (i - cards.length / 2) * 2;
+            const isSelected = selectedCard && selectedCard.index === i;
+            return (
+              <CardItem
+                key={card.id || i}
+                card={card}
+                rotation={rotation}
+                isSelected={isSelected}
+                onClick={() => onCardSelect(card, i)}
+                onLongPress={() => setPreviewCard(card)}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
-function CardItem({ card, rotation, isSelected, onClick }) {
+function CardItem({ card, rotation, isSelected, onClick, onLongPress }) {
+  const pressTimer = useRef(null);
+  const didLongPress = useRef(false);
+
+  function handleMouseDown() {
+    didLongPress.current = false;
+    pressTimer.current = setTimeout(() => {
+      didLongPress.current = true;
+      onLongPress();
+    }, 500);
+  }
+
+  function handleMouseUp() {
+    clearTimeout(pressTimer.current);
+  }
+
+  function handleClick() {
+    if (didLongPress.current) return;
+    onClick();
+  }
+
   return (
     <div
-      onClick={onClick}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onClick={handleClick}
       style={{
         ...cardStyle,
         transform: isSelected
@@ -44,13 +263,7 @@ function CardItem({ card, rotation, isSelected, onClick }) {
         e.currentTarget.style.transform = `rotate(${rotation}deg) translateY(-35px) scale(1.15)`;
         e.currentTarget.style.zIndex = 10;
       }}
-      onMouseLeave={(e) => {
-        if (isSelected) return;
-        e.currentTarget.style.transform = `rotate(${rotation}deg)`;
-        e.currentTarget.style.zIndex = 1;
-      }}
     >
-      {/* Card image fills the whole card */}
       <div style={{ position: "relative", width: "100%", flex: 1 }}>
         {card.img ? (
           <img
@@ -78,7 +291,6 @@ function CardItem({ card, rotation, isSelected, onClick }) {
         )}
       </div>
 
-      {/* Name and dmg at bottom */}
       <div
         style={{
           background: "rgba(0,0,0,0.8)",

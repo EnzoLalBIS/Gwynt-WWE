@@ -14,6 +14,8 @@ export default function GameBoard({
   enemyField,
   selectedCard,
   onRowClick,
+  selectingTarget,
+  onTargetSelect,
 }) {
   return (
     <div
@@ -35,6 +37,11 @@ export default function GameBoard({
           cards={enemyField[rowKeyMap[label]].cards}
           score={enemyField[rowKeyMap[label]].score}
           isClickable={false}
+          selectingTarget={selectingTarget}
+          onTargetSelect={onTargetSelect}
+          rowOffset={enemyRows
+            .slice(0, i)
+            .reduce((acc, r) => acc + enemyField[rowKeyMap[r]].cards.length, 0)}
         />
       ))}
 
@@ -52,8 +59,10 @@ export default function GameBoard({
           label={label}
           cards={playerField[rowKeyMap[label]].cards}
           score={playerField[rowKeyMap[label]].score}
-          isClickable={!!selectedCard}
+          isClickable={!!selectedCard && !selectingTarget}
           onRowClick={() => onRowClick(rowKeyMap[label])}
+          selectingTarget={false}
+          rowOffset={0}
         />
       ))}
 
@@ -62,7 +71,16 @@ export default function GameBoard({
   );
 }
 
-function Row({ label, cards, score, isClickable, onRowClick }) {
+function Row({
+  label,
+  cards,
+  score,
+  isClickable,
+  onRowClick,
+  selectingTarget,
+  onTargetSelect,
+  rowOffset = 0,
+}) {
   return (
     <div
       onClick={isClickable ? onRowClick : undefined}
@@ -97,7 +115,16 @@ function Row({ label, cards, score, isClickable, onRowClick }) {
 
       <div style={{ display: "flex", gap: "4px", flex: 1 }}>
         {cards.map((card, i) => (
-          <FieldCard key={i} card={card} />
+          <FieldCard
+            key={i}
+            card={card}
+            isTarget={selectingTarget && card.dmg > 0}
+            onClick={
+              selectingTarget && card.dmg > 0
+                ? () => onTargetSelect(rowOffset + i)
+                : undefined
+            }
+          />
         ))}
         {[...Array(Math.max(0, 5 - cards.length))].map((_, i) => (
           <CardSlot key={`empty-${i}`} />
@@ -107,19 +134,23 @@ function Row({ label, cards, score, isClickable, onRowClick }) {
   );
 }
 
-function FieldCard({ card }) {
+function FieldCard({ card, isTarget, onClick }) {
   return (
     <div
+      onClick={onClick}
       style={{
         width: "70px",
         height: "93px",
-        border: "2px solid #fca616",
+        border: isTarget ? "2px solid #ff4444" : "2px solid #fca616",
+        boxShadow: isTarget ? "0 0 12px rgba(255,68,68,0.8)" : "none",
         borderRadius: "8px",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         position: "relative",
         flexShrink: 0,
+        cursor: isTarget ? "pointer" : "default",
+        transition: "border 0.2s ease, box-shadow 0.2s ease",
       }}
     >
       {card.img ? (
@@ -167,7 +198,7 @@ function FieldCard({ card }) {
         </div>
         <div
           style={{
-            color: "#fca616",
+            color: isTarget ? "#ff4444" : "#fca616",
             fontSize: "12px",
             fontWeight: "900",
             textAlign: "center",

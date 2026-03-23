@@ -8,7 +8,8 @@ async function getByDeck(deckId) {
             dc.Qtt
      FROM cards c
      INNER JOIN Decks_cards dc ON c.id = dc.id_Card
-     WHERE dc.id_Deck = ?`,
+     WHERE dc.id_Deck = ?
+     AND NOT (c.dmg = 0)`,
     [deckId],
   );
   return { data: helper.emptyOrRows(rows) };

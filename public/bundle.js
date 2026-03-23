@@ -1329,7 +1329,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React9 = require_react(), Internals = {
+        var React10 = require_react(), Internals = {
           d: {
             f: noop,
             r: function() {
@@ -1347,16 +1347,16 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React9.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React10.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
         exports.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE = Internals;
-        exports.createPortal = function(children, container3) {
+        exports.createPortal = function(children, container4) {
           var key = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : null;
-          if (!container3 || 1 !== container3.nodeType && 9 !== container3.nodeType && 11 !== container3.nodeType)
+          if (!container4 || 1 !== container4.nodeType && 9 !== container4.nodeType && 11 !== container4.nodeType)
             throw Error("Target container is not a DOM element.");
-          return createPortal$1(children, container3, null, key);
+          return createPortal$1(children, container4, null, key);
         };
         exports.flushSync = function(fn) {
           var previousTransition = ReactSharedInternals.T, previousUpdatePriority = Internals.p;
@@ -2882,7 +2882,7 @@
           "number" === type && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React9.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React10.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -3449,15 +3449,15 @@
           );
           return false;
         }
-        function setTextContent(node, text) {
-          if (text) {
+        function setTextContent(node, text2) {
+          if (text2) {
             var firstChild = node.firstChild;
             if (firstChild && firstChild === node.lastChild && 3 === firstChild.nodeType) {
-              firstChild.nodeValue = text;
+              firstChild.nodeValue = text2;
               return;
             }
           }
-          node.textContent = text;
+          node.textContent = text2;
         }
         function camelize(string) {
           return string.replace(hyphenPattern, function(_, character) {
@@ -14996,8 +14996,8 @@
               if (null === targetInst$jscomp$0) return;
               var nodeTag = targetInst$jscomp$0.tag;
               if (3 === nodeTag || 4 === nodeTag) {
-                var container3 = targetInst$jscomp$0.stateNode.containerInfo;
-                if (container3 === targetContainer) break;
+                var container4 = targetInst$jscomp$0.stateNode.containerInfo;
+                if (container4 === targetContainer) break;
                 if (4 === nodeTag)
                   for (nodeTag = targetInst$jscomp$0.return; null !== nodeTag; ) {
                     var grandTag = nodeTag.tag;
@@ -15005,15 +15005,15 @@
                       return;
                     nodeTag = nodeTag.return;
                   }
-                for (; null !== container3; ) {
-                  nodeTag = getClosestInstanceFromNode(container3);
+                for (; null !== container4; ) {
+                  nodeTag = getClosestInstanceFromNode(container4);
                   if (null === nodeTag) return;
                   grandTag = nodeTag.tag;
                   if (5 === grandTag || 6 === grandTag || 26 === grandTag || 27 === grandTag) {
                     targetInst$jscomp$0 = ancestorInst = nodeTag;
                     continue a;
                   }
-                  container3 = container3.parentNode;
+                  container4 = container4.parentNode;
                 }
               }
               targetInst$jscomp$0 = targetInst$jscomp$0.return;
@@ -17152,16 +17152,16 @@
         function commitTextUpdate(textInstance, oldText, newText) {
           textInstance.nodeValue = newText;
         }
-        function warnForReactChildrenConflict(container3) {
-          if (!container3.__reactWarnedAboutChildrenConflict) {
-            var props = container3[internalPropsKey] || null;
+        function warnForReactChildrenConflict(container4) {
+          if (!container4.__reactWarnedAboutChildrenConflict) {
+            var props = container4[internalPropsKey] || null;
             if (null !== props) {
-              var fiber = getInstanceFromNode(container3);
-              null !== fiber && ("string" === typeof props.children || "number" === typeof props.children ? (container3.__reactWarnedAboutChildrenConflict = true, runWithFiberInDEV(fiber, function() {
+              var fiber = getInstanceFromNode(container4);
+              null !== fiber && ("string" === typeof props.children || "number" === typeof props.children ? (container4.__reactWarnedAboutChildrenConflict = true, runWithFiberInDEV(fiber, function() {
                 console.error(
                   'Cannot use a ref on a React element as a container to `createRoot` or `createPortal` if that element also sets "children" text content using React. It should be a leaf with no children. Otherwise it\'s ambiguous which children should be used.'
                 );
-              })) : null != props.dangerouslySetInnerHTML && (container3.__reactWarnedAboutChildrenConflict = true, runWithFiberInDEV(fiber, function() {
+              })) : null != props.dangerouslySetInnerHTML && (container4.__reactWarnedAboutChildrenConflict = true, runWithFiberInDEV(fiber, function() {
                 console.error(
                   'Cannot use a ref on a React element as a container to `createRoot` or `createPortal` if that element also sets "dangerouslySetInnerHTML" using React. It should be a leaf with no children. Otherwise it\'s ambiguous which children should be used.'
                 );
@@ -17175,8 +17175,8 @@
         function removeChild(parentInstance, child) {
           parentInstance.removeChild(child);
         }
-        function removeChildFromContainer(container3, child) {
-          (9 === container3.nodeType ? container3.body : "HTML" === container3.nodeName ? container3.ownerDocument.body : container3).removeChild(child);
+        function removeChildFromContainer(container4, child) {
+          (9 === container4.nodeType ? container4.body : "HTML" === container4.nodeName ? container4.ownerDocument.body : container4).removeChild(child);
         }
         function clearHydrationBoundary(parentInstance, hydrationInstance) {
           var node = hydrationInstance, depth = 0;
@@ -17244,11 +17244,11 @@
           props = void 0 !== props && null !== props && props.hasOwnProperty("display") ? props.display : null;
           instance.style.display = null == props || "boolean" === typeof props ? "" : ("" + props).trim();
         }
-        function unhideTextInstance(textInstance, text) {
-          textInstance.nodeValue = text;
+        function unhideTextInstance(textInstance, text2) {
+          textInstance.nodeValue = text2;
         }
-        function clearContainerSparingly(container3) {
-          var nextNode = container3.firstChild;
+        function clearContainerSparingly(container4) {
+          var nextNode = container4.firstChild;
           nextNode && 10 === nextNode.nodeType && (nextNode = nextNode.nextSibling);
           for (; nextNode; ) {
             var node = nextNode;
@@ -17266,7 +17266,7 @@
               case "LINK":
                 if ("stylesheet" === node.rel.toLowerCase()) continue;
             }
-            container3.removeChild(node);
+            container4.removeChild(node);
           }
         }
         function canHydrateInstance(instance, type, props, inRootOrSingleton) {
@@ -17310,8 +17310,8 @@
           }
           return null;
         }
-        function canHydrateTextInstance(instance, text, inRootOrSingleton) {
-          if ("" === text) return null;
+        function canHydrateTextInstance(instance, text2, inRootOrSingleton) {
+          if ("" === text2) return null;
           for (; 3 !== instance.nodeType; ) {
             if ((1 !== instance.nodeType || "INPUT" !== instance.nodeName || "hidden" !== instance.type) && !inRootOrSingleton)
               return null;
@@ -17374,8 +17374,8 @@
           }
           return 8 === instance.nodeType ? instance.data === ACTIVITY_START_DATA ? { type: "Activity", props: {} } : { type: "Suspense", props: {} } : instance.nodeValue;
         }
-        function diffHydratedTextForDevWarnings(textInstance, text, parentProps) {
-          return null === parentProps || true !== parentProps[SUPPRESS_HYDRATION_WARNING] ? (textInstance.nodeValue === text ? textInstance = null : (text = normalizeMarkupForTextOrAttribute(text), textInstance = normalizeMarkupForTextOrAttribute(textInstance.nodeValue) === text ? null : textInstance.nodeValue), textInstance) : null;
+        function diffHydratedTextForDevWarnings(textInstance, text2, parentProps) {
+          return null === parentProps || true !== parentProps[SUPPRESS_HYDRATION_WARNING] ? (textInstance.nodeValue === text2 ? textInstance = null : (text2 = normalizeMarkupForTextOrAttribute(text2), textInstance = normalizeMarkupForTextOrAttribute(textInstance.nodeValue) === text2 ? null : textInstance.nodeValue), textInstance) : null;
         }
         function getNextHydratableInstanceAfterHydrationBoundary(hydrationInstance) {
           hydrationInstance = hydrationInstance.nextSibling;
@@ -17408,8 +17408,8 @@
           }
           return null;
         }
-        function commitHydratedContainer(container3) {
-          retryIfBlockedOn(container3);
+        function commitHydratedContainer(container4) {
+          retryIfBlockedOn(container4);
         }
         function commitHydratedActivityInstance(activityInstance) {
           retryIfBlockedOn(activityInstance);
@@ -17479,8 +17479,8 @@
             instance.removeAttributeNode(attributes[0]);
           detachDeletedInstance(instance);
         }
-        function getHoistableRoot(container3) {
-          return "function" === typeof container3.getRootNode ? container3.getRootNode() : 9 === container3.nodeType ? container3 : container3.ownerDocument;
+        function getHoistableRoot(container4) {
+          return "function" === typeof container4.getRootNode ? container4.getRootNode() : 9 === container4.nodeType ? container4 : container4.ownerDocument;
         }
         function preconnectAs(rel, href, crossOrigin) {
           var ownerDocument = globalDocument;
@@ -17959,10 +17959,10 @@
           parentComponent = emptyContextObject;
           return parentComponent;
         }
-        function updateContainerImpl(rootFiber, lane, element, container3, parentComponent, callback) {
+        function updateContainerImpl(rootFiber, lane, element, container4, parentComponent, callback) {
           if (injectedHook && "function" === typeof injectedHook.onScheduleFiberRoot)
             try {
-              injectedHook.onScheduleFiberRoot(rendererID, container3, element);
+              injectedHook.onScheduleFiberRoot(rendererID, container4, element);
             } catch (err) {
               hasLoggedError || (hasLoggedError = true, console.error(
                 "React instrumentation encountered an error: %o",
@@ -17970,19 +17970,19 @@
               ));
             }
           parentComponent = getContextForSubtree(parentComponent);
-          null === container3.context ? container3.context = parentComponent : container3.pendingContext = parentComponent;
+          null === container4.context ? container4.context = parentComponent : container4.pendingContext = parentComponent;
           isRendering && null !== current && !didWarnAboutNestedUpdates && (didWarnAboutNestedUpdates = true, console.error(
             "Render methods should be a pure function of props and state; triggering nested component updates from render is not allowed. If necessary, trigger nested updates in componentDidUpdate.\n\nCheck the render method of %s.",
             getComponentNameFromFiber(current) || "Unknown"
           ));
-          container3 = createUpdate(lane);
-          container3.payload = { element };
+          container4 = createUpdate(lane);
+          container4.payload = { element };
           callback = void 0 === callback ? null : callback;
           null !== callback && ("function" !== typeof callback && console.error(
             "Expected the last optional `callback` argument to be a function. Instead received: %s.",
             callback
-          ), container3.callback = callback);
-          element = enqueueUpdate(rootFiber, container3, lane);
+          ), container4.callback = callback);
+          element = enqueueUpdate(rootFiber, container4, lane);
           null !== element && (startUpdateTimerByLane(lane, "root.render()", null), scheduleUpdateOnFiber(element, rootFiber, lane), entangleTransitions(element, rootFiber, lane));
         }
         function markRetryLaneImpl(fiber, retryLane) {
@@ -18015,22 +18015,22 @@
         function getCurrentFiberForDevTools() {
           return current;
         }
-        function dispatchDiscreteEvent(domEventName, eventSystemFlags, container3, nativeEvent) {
+        function dispatchDiscreteEvent(domEventName, eventSystemFlags, container4, nativeEvent) {
           var prevTransition = ReactSharedInternals.T;
           ReactSharedInternals.T = null;
           var previousPriority = ReactDOMSharedInternals.p;
           try {
-            ReactDOMSharedInternals.p = DiscreteEventPriority, dispatchEvent(domEventName, eventSystemFlags, container3, nativeEvent);
+            ReactDOMSharedInternals.p = DiscreteEventPriority, dispatchEvent(domEventName, eventSystemFlags, container4, nativeEvent);
           } finally {
             ReactDOMSharedInternals.p = previousPriority, ReactSharedInternals.T = prevTransition;
           }
         }
-        function dispatchContinuousEvent(domEventName, eventSystemFlags, container3, nativeEvent) {
+        function dispatchContinuousEvent(domEventName, eventSystemFlags, container4, nativeEvent) {
           var prevTransition = ReactSharedInternals.T;
           ReactSharedInternals.T = null;
           var previousPriority = ReactDOMSharedInternals.p;
           try {
-            ReactDOMSharedInternals.p = ContinuousEventPriority, dispatchEvent(domEventName, eventSystemFlags, container3, nativeEvent);
+            ReactDOMSharedInternals.p = ContinuousEventPriority, dispatchEvent(domEventName, eventSystemFlags, container4, nativeEvent);
           } finally {
             ReactDOMSharedInternals.p = previousPriority, ReactSharedInternals.T = prevTransition;
           }
@@ -18506,22 +18506,22 @@
         function ReactDOMHydrationRoot(internalRoot) {
           this._internalRoot = internalRoot;
         }
-        function warnIfReactDOMContainerInDEV(container3) {
-          container3[internalContainerInstanceKey] && (container3._reactRootContainer ? console.error(
+        function warnIfReactDOMContainerInDEV(container4) {
+          container4[internalContainerInstanceKey] && (container4._reactRootContainer ? console.error(
             "You are calling ReactDOMClient.createRoot() on a container that was previously passed to ReactDOM.render(). This is not supported."
           ) : console.error(
             "You are calling ReactDOMClient.createRoot() on a container that has already been passed to createRoot() before. Instead, call root.render() on the existing root instead if you want to update it."
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React9 = require_react(), ReactDOM2 = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React10 = require_react(), ReactDOM2 = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
         /* @__PURE__ */ Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
         /* @__PURE__ */ Symbol.for("react.legacy_hidden");
         /* @__PURE__ */ Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
         /* @__PURE__ */ Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React9.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM2.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React10.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM2.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21290,13 +21290,13 @@
           args = this._internalRoot;
           if (null !== args) {
             this._internalRoot = null;
-            var container3 = args.containerInfo;
+            var container4 = args.containerInfo;
             (executionContext & (RenderContext | CommitContext)) !== NoContext && console.error(
               "Attempted to synchronously unmount a root while React was already rendering. React cannot finish unmounting the root until the current render has completed, which may lead to a race condition."
             );
             updateContainerImpl(args.current, 2, null, args, null, null);
             flushSyncWork$1();
-            container3[internalContainerInstanceKey] = null;
+            container4[internalContainerInstanceKey] = null;
           }
         };
         ReactDOMHydrationRoot.prototype.unstable_scheduleHydration = function(target) {
@@ -21309,7 +21309,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React9.version;
+          var isomorphicReactPackageVersion = React10.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21363,10 +21363,10 @@
             "font-weight:bold"
           );
         }
-        exports.createRoot = function(container3, options) {
-          if (!isValidContainer(container3))
+        exports.createRoot = function(container4, options) {
+          if (!isValidContainer(container4))
             throw Error("Target container is not a DOM element.");
-          warnIfReactDOMContainerInDEV(container3);
+          warnIfReactDOMContainerInDEV(container4);
           var isStrictMode = false, identifierPrefix = "", onUncaughtError = defaultOnUncaughtError, onCaughtError = defaultOnCaughtError, onRecoverableError = defaultOnRecoverableError;
           null !== options && void 0 !== options && (options.hydrate ? console.warn(
             "hydrate through createRoot is deprecated. Use ReactDOMClient.hydrateRoot(container, <App />) instead."
@@ -21374,7 +21374,7 @@
             "You passed a JSX element to createRoot. You probably meant to call root.render instead. Example usage:\n\n  let root = createRoot(domContainer);\n  root.render(<App />);"
           ), true === options.unstable_strictMode && (isStrictMode = true), void 0 !== options.identifierPrefix && (identifierPrefix = options.identifierPrefix), void 0 !== options.onUncaughtError && (onUncaughtError = options.onUncaughtError), void 0 !== options.onCaughtError && (onCaughtError = options.onCaughtError), void 0 !== options.onRecoverableError && (onRecoverableError = options.onRecoverableError));
           options = createFiberRoot(
-            container3,
+            container4,
             1,
             false,
             null,
@@ -21387,21 +21387,21 @@
             onRecoverableError,
             defaultOnDefaultTransitionIndicator
           );
-          container3[internalContainerInstanceKey] = options.current;
-          listenToAllSupportedEvents(container3);
+          container4[internalContainerInstanceKey] = options.current;
+          listenToAllSupportedEvents(container4);
           return new ReactDOMRoot(options);
         };
-        exports.hydrateRoot = function(container3, initialChildren, options) {
-          if (!isValidContainer(container3))
+        exports.hydrateRoot = function(container4, initialChildren, options) {
+          if (!isValidContainer(container4))
             throw Error("Target container is not a DOM element.");
-          warnIfReactDOMContainerInDEV(container3);
+          warnIfReactDOMContainerInDEV(container4);
           void 0 === initialChildren && console.error(
             "Must provide initial children as second argument to hydrateRoot. Example usage: hydrateRoot(domContainer, <App />)"
           );
           var isStrictMode = false, identifierPrefix = "", onUncaughtError = defaultOnUncaughtError, onCaughtError = defaultOnCaughtError, onRecoverableError = defaultOnRecoverableError, formState = null;
           null !== options && void 0 !== options && (true === options.unstable_strictMode && (isStrictMode = true), void 0 !== options.identifierPrefix && (identifierPrefix = options.identifierPrefix), void 0 !== options.onUncaughtError && (onUncaughtError = options.onUncaughtError), void 0 !== options.onCaughtError && (onCaughtError = options.onCaughtError), void 0 !== options.onRecoverableError && (onRecoverableError = options.onRecoverableError), void 0 !== options.formState && (formState = options.formState));
           initialChildren = createFiberRoot(
-            container3,
+            container4,
             1,
             true,
             initialChildren,
@@ -21426,8 +21426,8 @@
           initialChildren.current.lanes = options;
           markRootUpdated$1(initialChildren, options);
           ensureRootIsScheduled(initialChildren);
-          container3[internalContainerInstanceKey] = initialChildren.current;
-          listenToAllSupportedEvents(container3);
+          container4[internalContainerInstanceKey] = initialChildren.current;
+          listenToAllSupportedEvents(container4);
           return new ReactDOMHydrationRoot(initialChildren);
         };
         exports.version = "19.2.4";
@@ -21450,7 +21450,7 @@
   });
 
   // src/script.jsx
-  var import_react8 = __toESM(require_react());
+  var import_react9 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // src/pages/auth.jsx
@@ -21626,8 +21626,23 @@
 
   // src/pages/mainMenu.jsx
   var import_react2 = __toESM(require_react());
-  function MainMenu({ startGame }) {
-    return /* @__PURE__ */ import_react2.default.createElement("div", { style: container2 }, /* @__PURE__ */ import_react2.default.createElement("img", { src: "/assets/logo.png", alt: "logo", style: logo2 }), /* @__PURE__ */ import_react2.default.createElement("div", { style: menuBox }, /* @__PURE__ */ import_react2.default.createElement(
+  function MainMenu({ startGame, onAccount, currentUser }) {
+    return /* @__PURE__ */ import_react2.default.createElement("div", { style: container2 }, /* @__PURE__ */ import_react2.default.createElement(
+      "div",
+      {
+        onClick: onAccount,
+        style: accountBtn,
+        onMouseEnter: (e) => e.currentTarget.style.background = "rgba(252,166,22,0.2)",
+        onMouseLeave: (e) => e.currentTarget.style.background = "rgba(0,0,0,0.5)"
+      },
+      /* @__PURE__ */ import_react2.default.createElement(
+        "span",
+        {
+          style: { fontSize: "12px", color: "#fca616", letterSpacing: "1px" }
+        },
+        currentUser ? currentUser.user_Name.toUpperCase() : "ACCOUNT"
+      )
+    ), /* @__PURE__ */ import_react2.default.createElement("img", { src: "/assets/logo.png", alt: "logo", style: logo2 }), /* @__PURE__ */ import_react2.default.createElement("div", { style: menuBox }, /* @__PURE__ */ import_react2.default.createElement(
       MenuItem,
       {
         title: "Career",
@@ -21648,13 +21663,13 @@
       }
     )), /* @__PURE__ */ import_react2.default.createElement("div", { style: lines }), /* @__PURE__ */ import_react2.default.createElement("img", { src: "/assets/img_user.png", alt: "badge", style: badge }));
   }
-  function MenuItem({ title, subtitle, onClick }) {
+  function MenuItem({ title: title2, subtitle, onClick }) {
     return /* @__PURE__ */ import_react2.default.createElement(
       "div",
       {
         style: menuItem,
         onClick: () => {
-          console.log("CLICK WORKS:", title);
+          console.log("CLICK WORKS:", title2);
           if (onClick) onClick();
         },
         onMouseEnter: (e) => {
@@ -21666,7 +21681,7 @@
           e.currentTarget.style.background = "transparent";
         }
       },
-      /* @__PURE__ */ import_react2.default.createElement("div", { style: menuTitle }, title),
+      /* @__PURE__ */ import_react2.default.createElement("div", { style: menuTitle }, title2),
       /* @__PURE__ */ import_react2.default.createElement("div", { style: menuSubtitle }, subtitle)
     );
   }
@@ -21680,7 +21695,8 @@
     justifyContent: "center",
     position: "relative",
     fontFamily: "'Russo One', sans-serif",
-    overflow: "hidden"
+    overflow: "visible"
+    // ← change hidden en visible
   };
   var logo2 = {
     width: "180px",
@@ -21739,12 +21755,185 @@
     0 -12px 0 #fca616
   `
   };
+  var accountBtn = {
+    position: "absolute",
+    top: "20px",
+    right: "20px",
+    padding: "8px 16px",
+    background: "rgba(0,0,0,0.5)",
+    border: "1px solid #fca616",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "0.2s ease"
+  };
+
+  // src/pages/account.jsx
+  var import_react3 = __toESM(require_react());
+  function Account({
+    setScreen,
+    currentUser,
+    selectedDeckId,
+    onDeckSelect
+  }) {
+    const [volume, setVolume] = (0, import_react3.useState)(50);
+    const [decks, setDecks] = (0, import_react3.useState)([]);
+    (0, import_react3.useEffect)(() => {
+      fetch("http://localhost:8081/Deck").then((res) => res.json()).then((json) => setDecks(json.data));
+    }, []);
+    const user = {
+      pseudo: currentUser ? currentUser.user_Name : "Player",
+      deck: decks.find((d) => d.id === selectedDeckId)?.name || "None"
+    };
+    return /* @__PURE__ */ import_react3.default.createElement("div", { style: container3 }, /* @__PURE__ */ import_react3.default.createElement(
+      "div",
+      {
+        onClick: () => setScreen("menu"),
+        style: backButton,
+        onMouseEnter: (e) => {
+          e.currentTarget.style.transform = "scale(1.1)";
+          e.currentTarget.style.boxShadow = "0 0 15px rgba(252,166,22,0.9)";
+        },
+        onMouseLeave: (e) => {
+          e.currentTarget.style.transform = "scale(1)";
+          e.currentTarget.style.boxShadow = "0 0 10px rgba(252,166,22,0.5)";
+        }
+      },
+      "\u2190 BACK"
+    ), /* @__PURE__ */ import_react3.default.createElement("img", { src: "/assets/logo.png", style: logo3 }), /* @__PURE__ */ import_react3.default.createElement("div", { style: title }, "ACCOUNT"), /* @__PURE__ */ import_react3.default.createElement("div", { style: grid }, /* @__PURE__ */ import_react3.default.createElement(Card, null, /* @__PURE__ */ import_react3.default.createElement("div", { style: cardTitle }, "STATS"), /* @__PURE__ */ import_react3.default.createElement("div", { style: text }, "\u{1F464} ", user.pseudo), /* @__PURE__ */ import_react3.default.createElement("div", { style: text }, "\u{1F3B4} Deck: ", user.deck), /* @__PURE__ */ import_react3.default.createElement("div", { style: subText }, "Wins: 12"), /* @__PURE__ */ import_react3.default.createElement("div", { style: subText }, "Losses: 5")), /* @__PURE__ */ import_react3.default.createElement(Card, null, /* @__PURE__ */ import_react3.default.createElement("div", { style: cardTitle }, "SETTINGS"), /* @__PURE__ */ import_react3.default.createElement("div", { style: text }, "\u{1F50A} Volume"), /* @__PURE__ */ import_react3.default.createElement(
+      "input",
+      {
+        type: "range",
+        min: "0",
+        max: "100",
+        value: volume,
+        onChange: (e) => setVolume(e.target.value),
+        style: slider
+      }
+    ), /* @__PURE__ */ import_react3.default.createElement("div", { style: subText }, volume, "%"), /* @__PURE__ */ import_react3.default.createElement("div", { style: button2 }, "Change Password")), /* @__PURE__ */ import_react3.default.createElement(Card, null, /* @__PURE__ */ import_react3.default.createElement("div", { style: cardTitle }, "DECKS"), decks.map((deck) => {
+      const isActive = deck.id === selectedDeckId;
+      return /* @__PURE__ */ import_react3.default.createElement(
+        "div",
+        {
+          key: deck.id,
+          onClick: () => onDeckSelect(deck.id),
+          style: {
+            padding: "10px",
+            borderRadius: "10px",
+            border: "2px solid #FCA616",
+            cursor: "pointer",
+            transition: "0.2s",
+            background: isActive ? "#FCA616" : "transparent",
+            color: isActive ? "#000" : "#FFFFFF"
+          }
+        },
+        deck.name
+      );
+    }))));
+  }
+  function Card({ children }) {
+    return /* @__PURE__ */ import_react3.default.createElement(
+      "div",
+      {
+        style: card,
+        onMouseEnter: (e) => {
+          e.currentTarget.style.transform = "scale(1.05)";
+          e.currentTarget.style.boxShadow = "0 0 30px rgba(252,166,22,0.8)";
+        },
+        onMouseLeave: (e) => {
+          e.currentTarget.style.transform = "scale(1)";
+          e.currentTarget.style.boxShadow = "0 0 20px rgba(252,166,22,0.5)";
+        }
+      },
+      children
+    );
+  }
+  var container3 = {
+    height: "100vh",
+    background: "linear-gradient(180deg, #1e2f52, #0c1424)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    fontFamily: "'Russo One', sans-serif",
+    position: "relative"
+  };
+  var backButton = {
+    position: "absolute",
+    top: "20px",
+    left: "20px",
+    padding: "8px 14px",
+    borderRadius: "10px",
+    border: "2px solid #FCA616",
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontFamily: "'Russo One', sans-serif",
+    background: "rgba(0,0,0,0.6)",
+    boxShadow: "0 0 10px rgba(252,166,22,0.5)",
+    transition: "0.2s"
+  };
+  var logo3 = {
+    width: "120px",
+    marginBottom: "10px",
+    filter: "drop-shadow(0 0 20px rgba(252,166,22,0.6))"
+  };
+  var title = {
+    fontSize: "32px",
+    color: "#fff",
+    marginBottom: "40px",
+    WebkitTextStroke: "1px #FCA616",
+    textShadow: "0 0 10px rgba(252,166,22,0.7)"
+  };
+  var grid = {
+    display: "flex",
+    gap: "40px"
+  };
+  var card = {
+    width: "260px",
+    minHeight: "300px",
+    background: "rgba(0,0,0,0.7)",
+    border: "2px solid #FCA616",
+    borderRadius: "16px",
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    cursor: "pointer",
+    transition: "0.2s",
+    boxShadow: "0 0 20px rgba(252,166,22,0.5)"
+  };
+  var cardTitle = {
+    fontSize: "18px",
+    color: "#fff",
+    WebkitTextStroke: "1px #FCA616",
+    marginBottom: "10px"
+  };
+  var text = {
+    color: "#fff",
+    fontSize: "14px"
+  };
+  var subText = {
+    color: "rgba(255,255,255,0.7)",
+    fontSize: "12px"
+  };
+  var button2 = {
+    marginTop: "15px",
+    padding: "8px",
+    borderRadius: "8px",
+    background: "#FCA616",
+    color: "#000",
+    textAlign: "center",
+    cursor: "pointer"
+  };
+  var slider = {
+    width: "100%"
+  };
 
   // src/pages/game.jsx
-  var import_react7 = __toESM(require_react());
+  var import_react8 = __toESM(require_react());
 
   // src/components/gameboard.jsx
-  var import_react3 = __toESM(require_react());
+  var import_react4 = __toESM(require_react());
   var rowKeyMap = {
     "In-Ring": "inRing",
     Hype: "hype",
@@ -21756,9 +21945,11 @@
     playerField,
     enemyField,
     selectedCard,
-    onRowClick
+    onRowClick,
+    selectingTarget,
+    onTargetSelect
   }) {
-    return /* @__PURE__ */ import_react3.default.createElement(
+    return /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
         style: {
@@ -21772,17 +21963,20 @@
           gap: "6px"
         }
       },
-      enemyRows.map((label, i) => /* @__PURE__ */ import_react3.default.createElement(
+      enemyRows.map((label, i) => /* @__PURE__ */ import_react4.default.createElement(
         Row,
         {
           key: i,
           label,
           cards: enemyField[rowKeyMap[label]].cards,
           score: enemyField[rowKeyMap[label]].score,
-          isClickable: false
+          isClickable: false,
+          selectingTarget,
+          onTargetSelect,
+          rowOffset: enemyRows.slice(0, i).reduce((acc, r) => acc + enemyField[rowKeyMap[r]].cards.length, 0)
         }
       )),
-      /* @__PURE__ */ import_react3.default.createElement(
+      /* @__PURE__ */ import_react4.default.createElement(
         "div",
         {
           style: {
@@ -21792,22 +21986,33 @@
           }
         }
       ),
-      playerRows.map((label, i) => /* @__PURE__ */ import_react3.default.createElement(
+      playerRows.map((label, i) => /* @__PURE__ */ import_react4.default.createElement(
         Row,
         {
           key: i,
           label,
           cards: playerField[rowKeyMap[label]].cards,
           score: playerField[rowKeyMap[label]].score,
-          isClickable: !!selectedCard,
-          onRowClick: () => onRowClick(rowKeyMap[label])
+          isClickable: !!selectedCard && !selectingTarget,
+          onRowClick: () => onRowClick(rowKeyMap[label]),
+          selectingTarget: false,
+          rowOffset: 0
         }
       )),
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { height: "10%" } })
+      /* @__PURE__ */ import_react4.default.createElement("div", { style: { height: "10%" } })
     );
   }
-  function Row({ label, cards, score, isClickable, onRowClick }) {
-    return /* @__PURE__ */ import_react3.default.createElement(
+  function Row({
+    label,
+    cards,
+    score,
+    isClickable,
+    onRowClick,
+    selectingTarget,
+    onTargetSelect,
+    rowOffset = 0
+  }) {
+    return /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
         onClick: isClickable ? onRowClick : void 0,
@@ -21826,7 +22031,7 @@
           transition: "border 0.2s ease"
         }
       },
-      /* @__PURE__ */ import_react3.default.createElement(
+      /* @__PURE__ */ import_react4.default.createElement(
         "div",
         {
           style: {
@@ -21836,33 +22041,45 @@
             flexDirection: "column"
           }
         },
-        /* @__PURE__ */ import_react3.default.createElement("span", null, label),
-        /* @__PURE__ */ import_react3.default.createElement("span", { style: { fontSize: "12px" } }, score)
+        /* @__PURE__ */ import_react4.default.createElement("span", null, label),
+        /* @__PURE__ */ import_react4.default.createElement("span", { style: { fontSize: "12px" } }, score)
       ),
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { display: "flex", gap: "4px", flex: 1 } }, cards.map((card, i) => /* @__PURE__ */ import_react3.default.createElement(FieldCard, { key: i, card })), [...Array(Math.max(0, 5 - cards.length))].map((_, i) => /* @__PURE__ */ import_react3.default.createElement(CardSlot, { key: `empty-${i}` })))
+      /* @__PURE__ */ import_react4.default.createElement("div", { style: { display: "flex", gap: "4px", flex: 1 } }, cards.map((card2, i) => /* @__PURE__ */ import_react4.default.createElement(
+        FieldCard,
+        {
+          key: i,
+          card: card2,
+          isTarget: selectingTarget && card2.dmg > 0,
+          onClick: selectingTarget && card2.dmg > 0 ? () => onTargetSelect(rowOffset + i) : void 0
+        }
+      )), [...Array(Math.max(0, 5 - cards.length))].map((_, i) => /* @__PURE__ */ import_react4.default.createElement(CardSlot, { key: `empty-${i}` })))
     );
   }
-  function FieldCard({ card }) {
-    return /* @__PURE__ */ import_react3.default.createElement(
+  function FieldCard({ card: card2, isTarget, onClick }) {
+    return /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
+        onClick,
         style: {
           width: "70px",
           height: "93px",
-          border: "2px solid #fca616",
+          border: isTarget ? "2px solid #ff4444" : "2px solid #fca616",
+          boxShadow: isTarget ? "0 0 12px rgba(255,68,68,0.8)" : "none",
           borderRadius: "8px",
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
           position: "relative",
-          flexShrink: 0
+          flexShrink: 0,
+          cursor: isTarget ? "pointer" : "default",
+          transition: "border 0.2s ease, box-shadow 0.2s ease"
         }
       },
-      card.img ? /* @__PURE__ */ import_react3.default.createElement(
+      card2.img ? /* @__PURE__ */ import_react4.default.createElement(
         "img",
         {
-          src: `http://localhost:8081/assets/image/${card.img}`,
-          alt: card.name,
+          src: `http://localhost:8081/assets/image/${card2.img}`,
+          alt: card2.name,
           style: {
             width: "100%",
             height: "100%",
@@ -21872,7 +22089,7 @@
             left: 0
           }
         }
-      ) : /* @__PURE__ */ import_react3.default.createElement(
+      ) : /* @__PURE__ */ import_react4.default.createElement(
         "div",
         {
           style: {
@@ -21882,7 +22099,7 @@
           }
         }
       ),
-      /* @__PURE__ */ import_react3.default.createElement(
+      /* @__PURE__ */ import_react4.default.createElement(
         "div",
         {
           style: {
@@ -21894,7 +22111,7 @@
             zIndex: 1
           }
         },
-        /* @__PURE__ */ import_react3.default.createElement(
+        /* @__PURE__ */ import_react4.default.createElement(
           "div",
           {
             style: {
@@ -21904,25 +22121,25 @@
               textAlign: "center"
             }
           },
-          card.name
+          card2.name
         ),
-        /* @__PURE__ */ import_react3.default.createElement(
+        /* @__PURE__ */ import_react4.default.createElement(
           "div",
           {
             style: {
-              color: "#fca616",
+              color: isTarget ? "#ff4444" : "#fca616",
               fontSize: "12px",
               fontWeight: "900",
               textAlign: "center"
             }
           },
-          card.dmg
+          card2.dmg
         )
       )
     );
   }
   function CardSlot() {
-    return /* @__PURE__ */ import_react3.default.createElement(
+    return /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
         style: {
@@ -21938,7 +22155,7 @@
   }
 
   // src/components/sidebar.jsx
-  var import_react4 = __toESM(require_react());
+  var import_react5 = __toESM(require_react());
   function Sidebar({
     playerScore,
     enemyScore,
@@ -21954,7 +22171,7 @@
       name: playerName || "Player",
       deck: "Bloodline Control"
     };
-    return /* @__PURE__ */ import_react4.default.createElement(
+    return /* @__PURE__ */ import_react5.default.createElement(
       "div",
       {
         style: {
@@ -21967,8 +22184,8 @@
           fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
         }
       },
-      /* @__PURE__ */ import_react4.default.createElement(PlayerCard, { title: "ENEMY", player: enemy, score: enemyScore }),
-      /* @__PURE__ */ import_react4.default.createElement(
+      /* @__PURE__ */ import_react5.default.createElement(PlayerCard, { title: "ENEMY", player: enemy, score: enemyScore }),
+      /* @__PURE__ */ import_react5.default.createElement(
         PlayerCard,
         {
           title: "PLAYER",
@@ -21980,8 +22197,8 @@
       )
     );
   }
-  function PlayerCard({ title, player, score, onPass, playerPassed }) {
-    return /* @__PURE__ */ import_react4.default.createElement(
+  function PlayerCard({ title: title2, player, score, onPass, playerPassed }) {
+    return /* @__PURE__ */ import_react5.default.createElement(
       "div",
       {
         style: {
@@ -21999,7 +22216,7 @@
           backdropFilter: "blur(4px)"
         }
       },
-      /* @__PURE__ */ import_react4.default.createElement(
+      /* @__PURE__ */ import_react5.default.createElement(
         "div",
         {
           style: {
@@ -22009,9 +22226,9 @@
             textTransform: "uppercase"
           }
         },
-        title
+        title2
       ),
-      /* @__PURE__ */ import_react4.default.createElement(
+      /* @__PURE__ */ import_react5.default.createElement(
         "div",
         {
           style: {
@@ -22022,8 +22239,8 @@
         },
         player.name
       ),
-      /* @__PURE__ */ import_react4.default.createElement("div", { style: { opacity: 0.75, fontSize: "15px" } }, player.deck),
-      /* @__PURE__ */ import_react4.default.createElement(
+      /* @__PURE__ */ import_react5.default.createElement("div", { style: { opacity: 0.75, fontSize: "15px" } }, player.deck),
+      /* @__PURE__ */ import_react5.default.createElement(
         "div",
         {
           style: {
@@ -22037,7 +22254,7 @@
         "\u2694\uFE0F ",
         score
       ),
-      onPass && /* @__PURE__ */ import_react4.default.createElement(
+      onPass && /* @__PURE__ */ import_react5.default.createElement(
         "button",
         {
           onClick: onPass,
@@ -22061,17 +22278,37 @@
   }
 
   // src/components/actionScreen.jsx
-  var import_react5 = __toESM(require_react());
-  function ActionScreen() {
-    return /* @__PURE__ */ import_react5.default.createElement("div", { style: screenStyle }, /* @__PURE__ */ import_react5.default.createElement(
-      "video",
+  var import_react6 = __toESM(require_react());
+  function ActionScreen({ animation }) {
+    return /* @__PURE__ */ import_react6.default.createElement("div", { style: screenStyle }, animation ? /* @__PURE__ */ import_react6.default.createElement(
+      "img",
       {
-        src: "/videos/action.mp4",
-        autoPlay: true,
-        muted: true,
-        loop: true,
-        style: videoStyle
+        src: `http://localhost:8081/assets/gif/${animation}.gif`,
+        alt: animation,
+        style: mediaStyle
       }
+    ) : /* @__PURE__ */ import_react6.default.createElement(
+      "div",
+      {
+        style: {
+          ...mediaStyle,
+          background: "rgba(0,0,0,0.5)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }
+      },
+      /* @__PURE__ */ import_react6.default.createElement(
+        "span",
+        {
+          style: {
+            color: "rgba(252,166,22,0.3)",
+            fontSize: "12px",
+            fontFamily: "'Russo One', sans-serif"
+          }
+        },
+        "WAITING..."
+      )
     ));
   }
   var screenStyle = {
@@ -22089,7 +22326,7 @@
   `,
     overflow: "hidden"
   };
-  var videoStyle = {
+  var mediaStyle = {
     width: "100%",
     height: "100%",
     objectFit: "cover",
@@ -22097,28 +22334,241 @@
   };
 
   // src/components/playerHand.jsx
-  var import_react6 = __toESM(require_react());
+  var import_react7 = __toESM(require_react());
   function PlayerHand({ cards = [], selectedCard, onCardSelect }) {
-    return /* @__PURE__ */ import_react6.default.createElement("div", { style: handContainer }, /* @__PURE__ */ import_react6.default.createElement("div", { style: handScroller }, cards.map((card, i) => {
-      const rotation = (i - cards.length / 2) * 2;
-      const isSelected = selectedCard && selectedCard.index === i;
-      return /* @__PURE__ */ import_react6.default.createElement(
-        CardItem,
-        {
-          key: card.id || i,
-          card,
-          rotation,
-          isSelected,
-          onClick: () => onCardSelect(card, i)
+    const [previewCard, setPreviewCard] = (0, import_react7.useState)(null);
+    const [previewEffect, setPreviewEffect] = (0, import_react7.useState)(null);
+    (0, import_react7.useEffect)(() => {
+      if (!previewCard || !previewCard.effect) {
+        setPreviewEffect(null);
+        return;
+      }
+      fetch(`http://localhost:8081/cardsEffects/${previewCard.id}`).then((res) => res.json()).then((json) => {
+        if (json.data && json.data.length > 0) {
+          setPreviewEffect(json.data[0]);
         }
-      );
-    })));
-  }
-  function CardItem({ card, rotation, isSelected, onClick }) {
-    return /* @__PURE__ */ import_react6.default.createElement(
+      });
+    }, [previewCard]);
+    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, previewCard && /* @__PURE__ */ import_react7.default.createElement(
       "div",
       {
-        onClick,
+        onClick: () => {
+          setPreviewCard(null);
+          setPreviewEffect(null);
+        },
+        style: {
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          background: "rgba(0,0,0,0.85)",
+          zIndex: 1e3,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }
+      },
+      /* @__PURE__ */ import_react7.default.createElement(
+        "div",
+        {
+          onClick: (e) => e.stopPropagation(),
+          style: {
+            background: "linear-gradient(180deg, #1e2f52, #0c1424)",
+            border: "2px solid #fca616",
+            borderRadius: "16px",
+            overflow: "hidden",
+            width: "280px",
+            display: "flex",
+            flexDirection: "column",
+            boxShadow: "0 0 30px rgba(252,166,22,0.6)"
+          }
+        },
+        previewCard.img ? /* @__PURE__ */ import_react7.default.createElement(
+          "img",
+          {
+            src: `http://localhost:8081/assets/image/${previewCard.img}`,
+            alt: previewCard.name,
+            style: {
+              width: "100%",
+              height: "280px",
+              objectFit: "contain",
+              background: "rgba(0,0,0,0.5)"
+            }
+          }
+        ) : /* @__PURE__ */ import_react7.default.createElement(
+          "div",
+          {
+            style: {
+              width: "100%",
+              height: "280px",
+              background: "rgba(255,255,255,0.05)"
+            }
+          }
+        ),
+        /* @__PURE__ */ import_react7.default.createElement(
+          "div",
+          {
+            style: {
+              padding: "16px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px"
+            }
+          },
+          /* @__PURE__ */ import_react7.default.createElement(
+            "div",
+            {
+              style: {
+                color: "white",
+                fontSize: "18px",
+                fontWeight: "700",
+                fontFamily: "'Russo One', sans-serif",
+                textAlign: "center"
+              }
+            },
+            previewCard.name
+          ),
+          /* @__PURE__ */ import_react7.default.createElement(
+            "div",
+            {
+              style: {
+                display: "flex",
+                justifyContent: "center",
+                gap: "8px",
+                alignItems: "center"
+              }
+            },
+            /* @__PURE__ */ import_react7.default.createElement("span", { style: { color: "#fca616", fontSize: "14px" } }, "\u2694\uFE0F DMG"),
+            /* @__PURE__ */ import_react7.default.createElement(
+              "span",
+              {
+                style: {
+                  color: "white",
+                  fontSize: "20px",
+                  fontWeight: "900"
+                }
+              },
+              previewCard.dmg
+            )
+          ),
+          /* @__PURE__ */ import_react7.default.createElement(
+            "div",
+            {
+              style: {
+                color: "rgba(255,255,255,0.7)",
+                fontSize: "12px",
+                textAlign: "center",
+                fontStyle: "italic"
+              }
+            },
+            previewCard.description
+          ),
+          previewEffect && /* @__PURE__ */ import_react7.default.createElement(
+            "div",
+            {
+              style: {
+                background: "rgba(252,166,22,0.1)",
+                border: "1px solid rgba(252,166,22,0.4)",
+                borderRadius: "8px",
+                padding: "10px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "4px"
+              }
+            },
+            /* @__PURE__ */ import_react7.default.createElement(
+              "div",
+              {
+                style: {
+                  color: "#fca616",
+                  fontSize: "12px",
+                  fontWeight: "700",
+                  textAlign: "center"
+                }
+              },
+              "\u2728 ",
+              previewEffect.description
+            ),
+            /* @__PURE__ */ import_react7.default.createElement(
+              "div",
+              {
+                style: {
+                  color: "rgba(255,255,255,0.7)",
+                  fontSize: "11px",
+                  textAlign: "center"
+                }
+              },
+              previewEffect.state.replace("_", " "),
+              " \u2014",
+              " ",
+              previewEffect.dmg > 0 ? `${previewEffect.dmg} dmg` : "no damage"
+            ),
+            /* @__PURE__ */ import_react7.default.createElement(
+              "div",
+              {
+                style: {
+                  color: "rgba(255,255,255,0.5)",
+                  fontSize: "10px",
+                  textAlign: "center"
+                }
+              },
+              previewEffect.effect_trigger === "on_play" ? "Triggers on play" : "Triggers each turn start"
+            )
+          ),
+          /* @__PURE__ */ import_react7.default.createElement(
+            "div",
+            {
+              style: {
+                color: "rgba(255,255,255,0.4)",
+                fontSize: "10px",
+                textAlign: "center"
+              }
+            },
+            "Click anywhere to close"
+          )
+        )
+      )
+    ), /* @__PURE__ */ import_react7.default.createElement("div", { style: handContainer }, /* @__PURE__ */ import_react7.default.createElement("div", { style: handScroller }, cards.map((card2, i) => {
+      const rotation = (i - cards.length / 2) * 2;
+      const isSelected = selectedCard && selectedCard.index === i;
+      return /* @__PURE__ */ import_react7.default.createElement(
+        CardItem,
+        {
+          key: card2.id || i,
+          card: card2,
+          rotation,
+          isSelected,
+          onClick: () => onCardSelect(card2, i),
+          onLongPress: () => setPreviewCard(card2)
+        }
+      );
+    }))));
+  }
+  function CardItem({ card: card2, rotation, isSelected, onClick, onLongPress }) {
+    const pressTimer = (0, import_react7.useRef)(null);
+    const didLongPress = (0, import_react7.useRef)(false);
+    function handleMouseDown() {
+      didLongPress.current = false;
+      pressTimer.current = setTimeout(() => {
+        didLongPress.current = true;
+        onLongPress();
+      }, 500);
+    }
+    function handleMouseUp() {
+      clearTimeout(pressTimer.current);
+    }
+    function handleClick() {
+      if (didLongPress.current) return;
+      onClick();
+    }
+    return /* @__PURE__ */ import_react7.default.createElement(
+      "div",
+      {
+        onMouseDown: handleMouseDown,
+        onMouseUp: handleMouseUp,
+        onMouseLeave: handleMouseUp,
+        onClick: handleClick,
         style: {
           ...cardStyle,
           transform: isSelected ? `rotate(${rotation}deg) translateY(-45px) scale(1.2)` : `rotate(${rotation}deg)`,
@@ -22130,18 +22580,13 @@
           if (isSelected) return;
           e.currentTarget.style.transform = `rotate(${rotation}deg) translateY(-35px) scale(1.15)`;
           e.currentTarget.style.zIndex = 10;
-        },
-        onMouseLeave: (e) => {
-          if (isSelected) return;
-          e.currentTarget.style.transform = `rotate(${rotation}deg)`;
-          e.currentTarget.style.zIndex = 1;
         }
       },
-      /* @__PURE__ */ import_react6.default.createElement("div", { style: { position: "relative", width: "100%", flex: 1 } }, card.img ? /* @__PURE__ */ import_react6.default.createElement(
+      /* @__PURE__ */ import_react7.default.createElement("div", { style: { position: "relative", width: "100%", flex: 1 } }, card2.img ? /* @__PURE__ */ import_react7.default.createElement(
         "img",
         {
-          src: `http://localhost:8081/assets/image/${card.img}`,
-          alt: card.name,
+          src: `http://localhost:8081/assets/image/${card2.img}`,
+          alt: card2.name,
           style: {
             position: "absolute",
             top: 0,
@@ -22152,7 +22597,7 @@
             borderRadius: "8px 8px 0 0"
           }
         }
-      ) : /* @__PURE__ */ import_react6.default.createElement(
+      ) : /* @__PURE__ */ import_react7.default.createElement(
         "div",
         {
           style: {
@@ -22163,7 +22608,7 @@
           }
         }
       )),
-      /* @__PURE__ */ import_react6.default.createElement(
+      /* @__PURE__ */ import_react7.default.createElement(
         "div",
         {
           style: {
@@ -22173,8 +22618,8 @@
             flexShrink: 0
           }
         },
-        /* @__PURE__ */ import_react6.default.createElement("div", { style: cardNameStyle }, card.name),
-        /* @__PURE__ */ import_react6.default.createElement("div", { style: cardDmgStyle }, card.dmg)
+        /* @__PURE__ */ import_react7.default.createElement("div", { style: cardNameStyle }, card2.name),
+        /* @__PURE__ */ import_react7.default.createElement("div", { style: cardDmgStyle }, card2.dmg)
       )
     );
   }
@@ -22223,7 +22668,7 @@
   };
 
   // src/gameFeature/gameFetch.js
-  var Card = class {
+  var Card2 = class {
     constructor({
       id,
       name,
@@ -22258,7 +22703,7 @@
         console.log(`No cards found for deck ${deckId}`);
         return [];
       }
-      return json.data.map((c) => new Card(c));
+      return json.data.map((c) => new Card2(c));
     } catch (err) {
       console.error(`Error loading deck ${deckId}:`, err.message);
       return [];
@@ -22327,8 +22772,8 @@
   function drawCards(player, amount) {
     for (let i = 0; i < amount; i++) {
       if (player.deck.length === 0) break;
-      const card = player.deck.pop();
-      player.hand.push(card);
+      const card2 = player.deck.pop();
+      player.hand.push(card2);
     }
   }
   async function initGame(deck1Id, deck2Id) {
@@ -22364,8 +22809,8 @@
     const rows = ["boost", "hype", "inRing"];
     let allCards = [];
     rows.forEach((row) => {
-      enemy.field[row].cards.forEach((card, index) => {
-        allCards.push({ card, row, index });
+      enemy.field[row].cards.forEach((card2, index) => {
+        allCards.push({ card: card2, row, index });
       });
     });
     if (allCards.length === 0) {
@@ -22385,11 +22830,11 @@
     state.calculateScore(enemyId);
     state.addLog(`Player ${enemyId} score updated: ${enemy.score}`);
   }
-  function applyBoostSelf(card, playerId, dmg, state) {
-    card.dmg += dmg;
+  function applyBoostSelf(card2, playerId, dmg, state) {
+    card2.dmg += dmg;
     state.calculateScore(playerId);
     state.addLog(
-      `Player ${playerId} card ${card.name} boosted to ${card.dmg} dmg`
+      `Player ${playerId} card ${card2.name} boosted to ${card2.dmg} dmg`
     );
   }
   function applyBoostAlly(playerId, dmg, state) {
@@ -22397,16 +22842,16 @@
     const rows = ["boost", "hype", "inRing"];
     let allCards = [];
     rows.forEach((row) => {
-      player.field[row].cards.forEach((card) => {
-        allCards.push(card);
+      player.field[row].cards.forEach((card2) => {
+        allCards.push(card2);
       });
     });
     if (allCards.length === 0) {
       state.addLog(`No ally cards on field to boost`);
       return;
     }
-    allCards.forEach((card) => {
-      card.dmg += dmg;
+    allCards.forEach((card2) => {
+      card2.dmg += dmg;
     });
     state.calculateScore(playerId);
     state.addLog(
@@ -22421,7 +22866,7 @@
       dmg: 2,
       role: "token",
       effect: 0,
-      img: "token.png"
+      img: "jd.png"
     };
     state.players[playerId].field[row].cards.push(token);
     state.calculateScore(playerId);
@@ -22429,16 +22874,22 @@
       `Player ${playerId} spawned ${token.name} on ${row} - new score: ${state.players[playerId].score}`
     );
   }
-  async function triggerOnPlayEffect(card, playerId, state, targetCardIndex = null, row = "inRing") {
-    if (!card.effect) return;
-    const effectData = await fetchCardEffect(card.id);
+  async function requiresTarget(card2) {
+    if (!card2.effect) return false;
+    const effectData = await fetchCardEffect(card2.id);
+    if (!effectData) return false;
+    return effectData.state === "debuff_enemy" && effectData.effect_trigger === "on_play";
+  }
+  async function triggerOnPlayEffect(card2, playerId, state, targetCardIndex = null, row = "inRing") {
+    if (!card2.effect) return;
+    const effectData = await fetchCardEffect(card2.id);
     if (!effectData) {
-      state.addLog(`No effect data found for ${card.name}`);
+      state.addLog(`No effect data found for ${card2.name}`);
       return;
     }
     if (effectData.effect_trigger !== "on_play") return;
     const enemyId = playerId === 1 ? 2 : 1;
-    state.addLog(`${card.name} triggers: ${effectData.description}`);
+    state.addLog(`${card2.name} triggers: ${effectData.description}`);
     switch (effectData.state) {
       case "damage_enemy":
         applyDamage(enemyId, effectData.dmg, state);
@@ -22451,7 +22902,7 @@
         applyDebuff(enemyId, targetCardIndex, effectData.dmg, state);
         break;
       case "boost_self":
-        applyBoostSelf(card, playerId, effectData.dmg, state);
+        applyBoostSelf(card2, playerId, effectData.dmg, state);
         break;
       case "boost_ally":
         applyBoostAlly(playerId, effectData.dmg, state);
@@ -22467,17 +22918,17 @@
     const player = state.players[playerId];
     const rows = ["boost", "hype", "inRing"];
     for (const row of rows) {
-      for (const card of player.field[row].cards) {
-        if (!card.effect) continue;
-        const effectData = await fetchCardEffect(card.id);
+      for (const card2 of player.field[row].cards) {
+        if (!card2.effect) continue;
+        const effectData = await fetchCardEffect(card2.id);
         if (!effectData) continue;
         if (effectData.effect_trigger !== "on_turn_start") continue;
         state.addLog(
-          `${card.name} triggers on turn start: ${effectData.description}`
+          `${card2.name} triggers on turn start: ${effectData.description}`
         );
         switch (effectData.state) {
           case "boost_self":
-            applyBoostSelf(card, playerId, effectData.dmg, state);
+            applyBoostSelf(card2, playerId, effectData.dmg, state);
             break;
           default:
             state.addLog(`Unknown on_turn_start effect: ${effectData.state}`);
@@ -22518,10 +22969,10 @@
       console.log(`Row ${row} is full for player ${playerId}`);
       return false;
     }
-    const card = player.hand.splice(cardIndex, 1)[0];
-    player.field[row].cards.push(card);
-    state.addLog(`Player ${playerId} played ${card.name} on ${row}`);
-    await triggerOnPlayEffect(card, playerId, state, targetCardIndex, row);
+    const card2 = player.hand.splice(cardIndex, 1)[0];
+    player.field[row].cards.push(card2);
+    state.addLog(`Player ${playerId} played ${card2.name} on ${row}`);
+    await triggerOnPlayEffect(card2, playerId, state, targetCardIndex, row);
     state.calculateScore(playerId);
     state.addLog(`Player ${playerId} score: ${player.score}`);
     drawCard(state, playerId);
@@ -22537,9 +22988,9 @@
       console.log(`Player ${playerId} has no cards left in deck`);
       return;
     }
-    const card = player.deck.pop();
-    player.hand.push(card);
-    state.addLog(`Player ${playerId} drew ${card.name}`);
+    const card2 = player.deck.pop();
+    player.hand.push(card2);
+    state.addLog(`Player ${playerId} drew ${card2.name}`);
   }
   function passTurn(state, playerId) {
     const player = state.players[playerId];
@@ -22584,11 +23035,11 @@
   }
 
   // src/gameFeature/boto.js
-  async function botPlay(gameStateRef, syncRender, playCard2) {
+  async function botPlay(gameStateRef, syncRender, playCard2, setLastAnimation) {
     const state = gameStateRef.current;
     const bot = state.players[2];
     if (bot.passed || bot.hand.length === 0) return;
-    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    await new Promise((resolve) => setTimeout(resolve, 3e3));
     const cardIndex = Math.floor(Math.random() * bot.hand.length);
     const rows = ["boost", "hype", "inRing"];
     const availableRows = rows.filter((row2) => bot.field[row2].cards.length < 5);
@@ -22597,15 +23048,22 @@
       return;
     }
     const row = availableRows[Math.floor(Math.random() * availableRows.length)];
+    const card2 = bot.hand[cardIndex];
     await playCard2(state, 2, cardIndex, row);
+    if (setLastAnimation && card2.animation) {
+      setLastAnimation(card2.animation);
+    }
     syncRender();
   }
 
   // src/pages/game.jsx
-  function Game({ currentUser, playerDeckId }) {
-    const gameStateRef = (0, import_react7.useRef)(null);
-    const [renderData, setRenderData] = (0, import_react7.useState)(null);
-    const [selectedCard, setSelectedCard] = (0, import_react7.useState)(null);
+  function Game({ currentUser, playerDeckId, setScreen }) {
+    const gameStateRef = (0, import_react8.useRef)(null);
+    const [renderData, setRenderData] = (0, import_react8.useState)(null);
+    const [selectedCard, setSelectedCard] = (0, import_react8.useState)(null);
+    const [lastAnimation, setLastAnimation] = (0, import_react8.useState)(null);
+    const [selectingTarget, setSelectingTarget] = (0, import_react8.useState)(false);
+    const pendingPlayRef = (0, import_react8.useRef)(null);
     function syncRender() {
       const s = gameStateRef.current;
       setRenderData({
@@ -22654,14 +23112,15 @@
         }
       });
     }
-    (0, import_react7.useEffect)(() => {
+    (0, import_react8.useEffect)(() => {
       const botDeckId = playerDeckId === 1 ? 2 : 1;
       initGame(playerDeckId, botDeckId).then((state) => {
         gameStateRef.current = state;
         syncRender();
       });
     }, []);
-    function handleCardSelect(card, index) {
+    function handleCardSelect(card2, index) {
+      if (selectingTarget) return;
       if (selectedCard && selectedCard.index === index) {
         setSelectedCard(null);
         return;
@@ -22672,6 +23131,12 @@
     async function handleRowClick(rowKey) {
       if (!selectedCard) return;
       if (gameStateRef.current.activePlayer !== 1) return;
+      const needsTarget = await requiresTarget(selectedCard.card);
+      if (needsTarget) {
+        pendingPlayRef.current = { cardIndex: selectedCard.index, row: rowKey };
+        setSelectingTarget(true);
+        return;
+      }
       const success = await playCard(
         gameStateRef.current,
         1,
@@ -22679,10 +23144,32 @@
         rowKey
       );
       if (!success) return;
+      setLastAnimation(selectedCard.card.animation);
       setSelectedCard(null);
       syncRender();
       if (gameStateRef.current.activePlayer === 2) {
-        await botPlay(gameStateRef, syncRender, playCard);
+        await botPlay(gameStateRef, syncRender, playCard, setLastAnimation);
+      }
+    }
+    async function handleTargetSelect(targetCardIndex) {
+      if (!pendingPlayRef.current) return;
+      const { cardIndex, row } = pendingPlayRef.current;
+      const card2 = gameStateRef.current.players[1].hand[cardIndex];
+      const success = await playCard(
+        gameStateRef.current,
+        1,
+        cardIndex,
+        row,
+        targetCardIndex
+      );
+      if (!success) return;
+      setLastAnimation(card2.animation);
+      setSelectingTarget(false);
+      pendingPlayRef.current = null;
+      setSelectedCard(null);
+      syncRender();
+      if (gameStateRef.current.activePlayer === 2) {
+        await botPlay(gameStateRef, syncRender, playCard, setLastAnimation);
       }
     }
     async function handlePassTurn() {
@@ -22690,14 +23177,14 @@
       passTurn(gameStateRef.current, 1);
       syncRender();
       if (gameStateRef.current.activePlayer === 2) {
-        await botPlay(gameStateRef, syncRender, playCard);
+        await botPlay(gameStateRef, syncRender, playCard, setLastAnimation);
       }
     }
     if (!renderData) {
-      return /* @__PURE__ */ import_react7.default.createElement("div", { style: { color: "white" } }, "Loading game...");
+      return /* @__PURE__ */ import_react8.default.createElement("div", { style: { color: "white" } }, "Loading game...");
     }
     if (renderData.gameOver) {
-      return /* @__PURE__ */ import_react7.default.createElement(
+      return /* @__PURE__ */ import_react8.default.createElement(
         "div",
         {
           style: {
@@ -22712,18 +23199,18 @@
             fontFamily: "'Russo One', sans-serif"
           }
         },
-        /* @__PURE__ */ import_react7.default.createElement(
+        /* @__PURE__ */ import_react8.default.createElement(
           "div",
           {
             style: { fontSize: "48px", color: "#fca616", marginBottom: "20px" }
           },
           renderData.winner === 0 ? "DRAW" : `PLAYER ${renderData.winner} WINS`
         ),
-        /* @__PURE__ */ import_react7.default.createElement("div", { style: { fontSize: "24px", marginBottom: "40px" } }, renderData.players[1].score, " - ", renderData.players[2].score),
-        /* @__PURE__ */ import_react7.default.createElement(
+        /* @__PURE__ */ import_react8.default.createElement("div", { style: { fontSize: "24px", marginBottom: "40px" } }, renderData.players[1].score, " - ", renderData.players[2].score),
+        /* @__PURE__ */ import_react8.default.createElement(
           "button",
           {
-            onClick: () => window.location.reload(),
+            onClick: () => setScreen("menu"),
             style: {
               padding: "12px 32px",
               background: "rgba(252,166,22,0.2)",
@@ -22736,11 +23223,11 @@
               letterSpacing: "1px"
             }
           },
-          "PLAY AGAIN"
+          "BACK TO MENU"
         )
       );
     }
-    return /* @__PURE__ */ import_react7.default.createElement(
+    return /* @__PURE__ */ import_react8.default.createElement(
       "div",
       {
         style: {
@@ -22752,7 +23239,28 @@
           display: "flex"
         }
       },
-      /* @__PURE__ */ import_react7.default.createElement(
+      selectingTarget && /* @__PURE__ */ import_react8.default.createElement(
+        "div",
+        {
+          style: {
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background: "rgba(0,0,0,0.8)",
+            border: "2px solid #ff4444",
+            borderRadius: "12px",
+            padding: "12px 24px",
+            color: "#ff4444",
+            fontFamily: "'Russo One', sans-serif",
+            fontSize: "14px",
+            zIndex: 100,
+            pointerEvents: "none"
+          }
+        },
+        "SELECT A TARGET"
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
         Sidebar,
         {
           playerScore: renderData.players[1].score,
@@ -22762,17 +23270,19 @@
           playerName: currentUser ? currentUser.user_Name : "Player"
         }
       ),
-      /* @__PURE__ */ import_react7.default.createElement(
+      /* @__PURE__ */ import_react8.default.createElement(
         GameBoard,
         {
           playerField: renderData.players[1].field,
           enemyField: renderData.players[2].field,
           selectedCard,
-          onRowClick: handleRowClick
+          onRowClick: handleRowClick,
+          selectingTarget,
+          onTargetSelect: handleTargetSelect
         }
       ),
-      /* @__PURE__ */ import_react7.default.createElement(ActionScreen, null),
-      /* @__PURE__ */ import_react7.default.createElement(
+      /* @__PURE__ */ import_react8.default.createElement(ActionScreen, { animation: lastAnimation }),
+      /* @__PURE__ */ import_react8.default.createElement(
         PlayerHand,
         {
           cards: renderData.players[1].hand,
@@ -22785,10 +23295,11 @@
 
   // src/script.jsx
   function App() {
-    const [screen, setScreen] = (0, import_react8.useState)("auth");
-    const [currentUser, setCurrentUser] = (0, import_react8.useState)(null);
+    const [screen, setScreen] = (0, import_react9.useState)("auth");
+    const [currentUser, setCurrentUser] = (0, import_react9.useState)(null);
+    const [selectedDeckId, setSelectedDeckId] = (0, import_react9.useState)(2);
     if (screen === "auth") {
-      return /* @__PURE__ */ import_react8.default.createElement(
+      return /* @__PURE__ */ import_react9.default.createElement(
         AuthScreen,
         {
           onContinue: (user) => {
@@ -22799,13 +23310,38 @@
       );
     }
     if (screen === "menu") {
-      return /* @__PURE__ */ import_react8.default.createElement(MainMenu, { startGame: () => setScreen("game") });
+      return /* @__PURE__ */ import_react9.default.createElement(
+        MainMenu,
+        {
+          startGame: () => setScreen("game"),
+          onAccount: () => setScreen("account"),
+          currentUser
+        }
+      );
+    }
+    if (screen === "account") {
+      return /* @__PURE__ */ import_react9.default.createElement(
+        Account,
+        {
+          setScreen,
+          currentUser,
+          selectedDeckId,
+          onDeckSelect: setSelectedDeckId
+        }
+      );
     }
     if (screen === "game") {
-      return /* @__PURE__ */ import_react8.default.createElement(Game, { currentUser, playerDeckId: 2 });
+      return /* @__PURE__ */ import_react9.default.createElement(
+        Game,
+        {
+          currentUser,
+          playerDeckId: selectedDeckId,
+          setScreen
+        }
+      );
     }
   }
-  import_client.default.createRoot(document.getElementById("root")).render(/* @__PURE__ */ import_react8.default.createElement(App, null));
+  import_client.default.createRoot(document.getElementById("root")).render(/* @__PURE__ */ import_react9.default.createElement(App, null));
 })();
 /*! Bundled license information:
 

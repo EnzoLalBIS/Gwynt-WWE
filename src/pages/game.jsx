@@ -6,11 +6,15 @@ import PlayerHand from "../components/playerHand.jsx";
 import { initGame } from "../gameFeature/gameInit";
 import { playCard, passTurn } from "../gameFeature/gameLoop";
 import { botPlay } from "../gameFeature/boto";
+import { requiresTarget } from "../gameFeature/gameEffect";
 
-export default function Game({ currentUser, playerDeckId }) {
+export default function Game({ currentUser, playerDeckId, setScreen }) {
   const gameStateRef = useRef(null);
   const [renderData, setRenderData] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [lastAnimation, setLastAnimation] = useState(null);
+  const [selectingTarget, setSelectingTarget] = useState(false);
+  const pendingPlayRef = useRef(null);
 
   function syncRender() {
     const s = gameStateRef.current;
@@ -70,6 +74,7 @@ export default function Game({ currentUser, playerDeckId }) {
   }, []);
 
   function handleCardSelect(card, index) {
+    if (selectingTarget) return;
     if (selectedCard && selectedCard.index === index) {
       setSelectedCard(null);
       return;
@@ -82,20 +87,55 @@ export default function Game({ currentUser, playerDeckId }) {
     if (!selectedCard) return;
     if (gameStateRef.current.activePlayer !== 1) return;
 
+    const needsTarget = await requiresTarget(selectedCard.card);
+
+    if (needsTarget) {
+      pendingPlayRef.current = { cardIndex: selectedCard.index, row: rowKey };
+      setSelectingTarget(true);
+      return;
+    }
+
     const success = await playCard(
       gameStateRef.current,
       1,
       selectedCard.index,
       rowKey,
     );
-
     if (!success) return;
 
+    setLastAnimation(selectedCard.card.animation);
     setSelectedCard(null);
     syncRender();
 
     if (gameStateRef.current.activePlayer === 2) {
-      await botPlay(gameStateRef, syncRender, playCard);
+      await botPlay(gameStateRef, syncRender, playCard, setLastAnimation);
+    }
+  }
+
+  async function handleTargetSelect(targetCardIndex) {
+    if (!pendingPlayRef.current) return;
+
+    const { cardIndex, row } = pendingPlayRef.current;
+    const card = gameStateRef.current.players[1].hand[cardIndex];
+
+    const success = await playCard(
+      gameStateRef.current,
+      1,
+      cardIndex,
+      row,
+      targetCardIndex,
+    );
+
+    if (!success) return;
+
+    setLastAnimation(card.animation);
+    setSelectingTarget(false);
+    pendingPlayRef.current = null;
+    setSelectedCard(null);
+    syncRender();
+
+    if (gameStateRef.current.activePlayer === 2) {
+      await botPlay(gameStateRef, syncRender, playCard, setLastAnimation);
     }
   }
 
@@ -106,7 +146,7 @@ export default function Game({ currentUser, playerDeckId }) {
     syncRender();
 
     if (gameStateRef.current.activePlayer === 2) {
-      await botPlay(gameStateRef, syncRender, playCard);
+      await botPlay(gameStateRef, syncRender, playCard, setLastAnimation);
     }
   }
 
@@ -140,7 +180,7 @@ export default function Game({ currentUser, playerDeckId }) {
           {renderData.players[1].score} - {renderData.players[2].score}
         </div>
         <button
-          onClick={() => window.location.reload()}
+          onClick={() => setScreen("menu")}
           style={{
             padding: "12px 32px",
             background: "rgba(252,166,22,0.2)",
@@ -153,7 +193,7 @@ export default function Game({ currentUser, playerDeckId }) {
             letterSpacing: "1px",
           }}
         >
-          PLAY AGAIN
+          BACK TO MENU
         </button>
       </div>
     );
@@ -170,6 +210,28 @@ export default function Game({ currentUser, playerDeckId }) {
         display: "flex",
       }}
     >
+      {selectingTarget && (
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background: "rgba(0,0,0,0.8)",
+            border: "2px solid #ff4444",
+            borderRadius: "12px",
+            padding: "12px 24px",
+            color: "#ff4444",
+            fontFamily: "'Russo One', sans-serif",
+            fontSize: "14px",
+            zIndex: 100,
+            pointerEvents: "none",
+          }}
+        >
+          SELECT A TARGET
+        </div>
+      )}
+
       <Sidebar
         playerScore={renderData.players[1].score}
         enemyScore={renderData.players[2].score}
@@ -183,9 +245,11 @@ export default function Game({ currentUser, playerDeckId }) {
         enemyField={renderData.players[2].field}
         selectedCard={selectedCard}
         onRowClick={handleRowClick}
+        selectingTarget={selectingTarget}
+        onTargetSelect={handleTargetSelect}
       />
 
-      <ActionScreen />
+      <ActionScreen animation={lastAnimation} />
 
       <PlayerHand
         cards={renderData.players[1].hand}
